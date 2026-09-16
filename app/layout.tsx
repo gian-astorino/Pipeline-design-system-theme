@@ -2,6 +2,8 @@ import { Inter } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster as SonnerToaster } from "@/components/ui/sonner"
+import { Toaster as ToastToaster } from "@/components/ui/toast"
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -24,7 +26,10 @@ export default function RootLayout({
           design-system-provider tags <body>, no CSS reads it) but kept
           for parity with what the preset actually resolves to. */}
       <body className="style-luma base-color-neutral">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ToastToaster>{children}</ToastToaster>
+          <SonnerToaster />
+        </ThemeProvider>
       </body>
     </html>
   )
