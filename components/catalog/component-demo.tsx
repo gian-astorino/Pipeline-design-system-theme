@@ -23,7 +23,7 @@ export function ComponentDemo({
       <div>
         <h3 className="mb-2 text-sm font-medium text-muted-foreground">Demo</h3>
         {Demo ? (
-          <div className="overflow-hidden rounded-lg border border-border">
+          <div className="overflow-x-auto rounded-lg border border-border [contain:layout]">
             <Demo />
           </div>
         ) : (
