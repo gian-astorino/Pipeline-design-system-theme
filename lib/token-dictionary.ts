@@ -134,7 +134,16 @@ const SIZE_PREFIX_PARTS: Record<string, string> = {
   size: "Dimensione (larghezza e altezza)",
 };
 
-const MODIFIER_SEGMENT = String.raw`[\w-]+(?:\[[^\]]*\])?(?:/[\w-]+)?`;
+// Tailwind v4's bare "*:" (direct children) and "**:" (all descendants)
+// combinator variants, and a bare arbitrary-selector segment like
+// "[svg]:" (e.g. in "focus:*:[svg]:text-accent-foreground"), don't
+// match the [\w-]+ word-based branch below, so without their own
+// branches here the chain regex simply stops right before them —
+// silently truncating everything to their left and making a class
+// that's actually deeply conditional (e.g.
+// "not-dark:focus:**:text-accent-foreground") register as if it were
+// unconditional.
+const MODIFIER_SEGMENT = String.raw`(?:\*+|\[[^\]]*\]|[\w-]+(?:\[[^\]]*\])?(?:/[\w-]+)?)`;
 const MODIFIER_CHAIN = `((?:${MODIFIER_SEGMENT}:)*)`;
 
 function buildRegexes() {
@@ -199,6 +208,19 @@ const MODIFIER_LABELS: Record<string, string> = {
   "data-active": "attivo",
   "data-horizontal": "orizzontale",
   "data-vertical": "verticale",
+  "data-focused": "focus",
+  "data-focus-visible": "focus",
+  "data-highlighted": "evidenziato",
+  "data-invalid": "invalido",
+  "data-placeholder": "placeholder",
+  "data-empty": "vuoto",
+  "data-inset": "con icona indentata",
+  "data-popup-open": "popup aperto",
+  "data-nested-drawer-open": "drawer annidato aperto",
+  "data-starting-style": "in apertura",
+  "data-ending-style": "in chiusura",
+  "data-entering": "in entrata",
+  "data-exiting": "in uscita",
 };
 
 const DATA_STATE_LABELS: Record<string, string> = {
@@ -247,7 +269,15 @@ function describeModifiers(chain: string): string | null {
     const segment = raw.replace(/\/[\w-]+$/, "");
     const negated = segment.startsWith("not-");
     const base = negated ? segment.slice(4) : segment;
-    const label = MODIFIER_LABELS[base] ?? labelForDataState(base) ?? labelForAnyAttr(base);
+    // group-data-checked, peer-data-open, ... reuse the same bare
+    // data-* vocabulary as their ungrouped form once the group-/peer-
+    // prefix (already meaningful only for scoping, not for the label
+    // itself) is peeled off.
+    const label =
+      MODIFIER_LABELS[base] ??
+      MODIFIER_LABELS[base.replace(/^(?:group|peer)-/, "")] ??
+      labelForDataState(base) ??
+      labelForAnyAttr(base);
     if (!label) continue;
     const finalLabel = negated ? `non ${label}` : label;
     if (!labels.includes(finalLabel)) labels.push(finalLabel);
@@ -272,10 +302,11 @@ function partForSizeClass(className: string): string {
   return SIZE_PREFIX_PARTS[prefix] ?? prefix;
 }
 
-function* findUtilities(source: string, regex: RegExp): Generator<[string, string | null]> {
+function* findUtilities(source: string, regex: RegExp): Generator<[string, string | null, number]> {
   for (const match of source.matchAll(regex)) {
     const chain = match[1];
-    yield [match[0].slice(chain.length), describeModifiers(chain)];
+    const segmentCount = chain.split(":").filter(Boolean).length;
+    yield [match[0].slice(chain.length), describeModifiers(chain), segmentCount];
   }
 }
 
@@ -287,44 +318,58 @@ function* findUtilities(source: string, regex: RegExp): Generator<[string, strin
  *  here, not directly on the element. */
 export function extractTokenMatches(source: string): TokenMatch[] {
   const seen = new Map<string, TokenMatch>();
+  // Tracks how many raw modifier segments (e.g. "**:data-[variant=x]:")
+  // produced the currently kept row for a className, so a later match
+  // with a simpler, more directly relevant condition (e.g. plain
+  // "focus:") can replace one that only won by appearing earlier in the
+  // expanded source — see the text-accent-foreground case in menu
+  // components, where an incidental "**:data-[variant=destructive]:"
+  // occurrence (from the unrelated translucent-menu variant) used to
+  // shadow the far more relevant "focus:" one.
+  const complexity = new Map<string, number>();
 
   const add = (
     className: string,
     category: TokenCategory,
     cssVar: string,
     part: string,
-    state: string | null
+    state: string | null,
+    segmentCount: number
   ) => {
-    if (!seen.has(className)) seen.set(className, { className, category, cssVar, part, state });
+    const current = complexity.get(className);
+    if (current === undefined || segmentCount < current) {
+      seen.set(className, { className, category, cssVar, part, state });
+      complexity.set(className, segmentCount);
+    }
   };
 
-  for (const [m, state] of findUtilities(source, REGEXES.color)) {
-    add(m, "color", cssVarForColorClass(m), partForColorClass(m), state);
+  for (const [m, state, n] of findUtilities(source, REGEXES.color)) {
+    add(m, "color", cssVarForColorClass(m), partForColorClass(m), state, n);
   }
-  for (const [m, state] of findUtilities(source, REGEXES.radius)) {
+  for (const [m, state, n] of findUtilities(source, REGEXES.radius)) {
     const suffix = m.includes("-") ? m.split("-").slice(1).join("-") : "sm";
-    add(m, "radius", `--radius-${suffix}`, PART_LABELS.radius, state);
+    add(m, "radius", `--radius-${suffix}`, PART_LABELS.radius, state, n);
   }
-  for (const [m, state] of findUtilities(source, REGEXES.shadow)) {
-    add(m, "shadow", `--shadow-${m.split("-").slice(1).join("-")}`, PART_LABELS.shadow, state);
+  for (const [m, state, n] of findUtilities(source, REGEXES.shadow)) {
+    add(m, "shadow", `--shadow-${m.split("-").slice(1).join("-")}`, PART_LABELS.shadow, state, n);
   }
-  for (const [m, state] of findUtilities(source, REGEXES.fontSize)) {
-    add(m, "font-size", `--text-${m.split("-").slice(1).join("-")}`, PART_LABELS["font-size"], state);
+  for (const [m, state, n] of findUtilities(source, REGEXES.fontSize)) {
+    add(m, "font-size", `--text-${m.split("-").slice(1).join("-")}`, PART_LABELS["font-size"], state, n);
   }
-  for (const [m, state] of findUtilities(source, REGEXES.fontWeight)) {
-    add(m, "font-weight", `--font-weight-${m.split("-").slice(1).join("-")}`, PART_LABELS["font-weight"], state);
+  for (const [m, state, n] of findUtilities(source, REGEXES.fontWeight)) {
+    add(m, "font-weight", `--font-weight-${m.split("-").slice(1).join("-")}`, PART_LABELS["font-weight"], state, n);
   }
-  for (const [m, state] of findUtilities(source, REGEXES.tracking)) {
-    add(m, "tracking", `--tracking-${m.split("-").slice(1).join("-")}`, PART_LABELS.tracking, state);
+  for (const [m, state, n] of findUtilities(source, REGEXES.tracking)) {
+    add(m, "tracking", `--tracking-${m.split("-").slice(1).join("-")}`, PART_LABELS.tracking, state, n);
   }
-  for (const [m, state] of findUtilities(source, REGEXES.leading)) {
-    add(m, "leading", `--leading-${m.split("-").slice(1).join("-")}`, PART_LABELS.leading, state);
+  for (const [m, state, n] of findUtilities(source, REGEXES.leading)) {
+    add(m, "leading", `--leading-${m.split("-").slice(1).join("-")}`, PART_LABELS.leading, state, n);
   }
-  for (const [m, state] of findUtilities(source, REGEXES.padding)) {
-    add(m, "padding", "--spacing", partForPaddingClass(m), state);
+  for (const [m, state, n] of findUtilities(source, REGEXES.padding)) {
+    add(m, "padding", "--spacing", partForPaddingClass(m), state, n);
   }
-  for (const [m, state] of findUtilities(source, REGEXES.size)) {
-    add(m, "size", "--spacing", partForSizeClass(m), state);
+  for (const [m, state, n] of findUtilities(source, REGEXES.size)) {
+    add(m, "size", "--spacing", partForSizeClass(m), state, n);
   }
 
   return [...seen.values()].sort((a, b) =>
