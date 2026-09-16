@@ -1,3 +1,6 @@
+import Link from "next/link"
+import { ArrowRight } from "@phosphor-icons/react/ssr"
+
 import {
   Card,
   CardContent,
@@ -26,6 +29,18 @@ export default function Home() {
           base=base · style=luma · theme=blue · baseColor=neutral ·
           font=inter · icons=phosphor
         </p>
+        <div className="mt-3 flex flex-wrap gap-3">
+          <Button render={<Link href="/tokens" />}>
+            Esplora i token
+            <ArrowRight className="size-4" />
+          </Button>
+          <Button render={<Link href="/components/button/" />} variant="outline">
+            Libreria componenti
+          </Button>
+          <Button render={<Link href="/dependencies" />} variant="outline">
+            Dipendenze esterne
+          </Button>
+        </div>
       </header>
 
       <Card>

@@ -68,15 +68,47 @@ Everything else — dependency versions, `tsconfig.json`, `postcss.config.mjs`
 — comes straight from `shadcn-ui/ui`'s own `templates/next-app` and
 `apps/v4/package.json`.
 
-## What's here vs. what isn't
+## Token / component audit pages
 
-`app/page.tsx` is a small hand-built sanity page (buttons, card, form
-controls) to confirm the theme actually renders — not a component catalog.
-All 62 `base` components are installed in `components/ui/` and ready to use,
-but only a handful are wired into a demo. Porting the token/component audit
-tooling from `Pipelean-Design-System-Playground` (the auto-extracted
-"Token collegati" tables, the `/tokens` and `/components` pages) onto this
-new component set is a separate, not-yet-started piece of work.
+`/tokens`, `/components` and `/dependencies` are ported from
+`Pipelean-Design-System-Playground`, adapted for a real architectural
+difference between the two component sets:
+
+- Pipelean's components put Tailwind utility classes (`bg-primary`,
+  `text-sm`, ...) directly on the element. Its `lib/token-dictionary.ts`
+  finds them by scanning the component's own `.tsx` source.
+- This repo's `base`/`luma` components don't — colors, radius, and most
+  spacing sit behind a `cn-*` class (e.g. `cn-button-variant-default`),
+  whose real utilities live in an `@apply` rule in `app/style-luma.css`.
+  Scanning the `.tsx` alone would find almost nothing.
+
+`lib/cn-classes.ts` closes that gap: it parses `style-luma.css` once into a
+`cn-class -> utility classes` table, and `lib/read-component-source.ts`
+expands every `cn-*` token in a component's source through that table
+*before* handing the (now much more literal) text to the same
+regex-based extractor Pipelean uses. `lib/token-dictionary.ts` itself only
+needed two real changes: this repo's smaller semantic-role vocabulary (no
+`success`/`warning`/`info`, no `destructive-foreground` — this preset never
+added Pipelean's pipeline-run status roles), and a few more modifier labels
+for the bare custom variants `shadcn/tailwind.css` defines
+(`data-checked:`, `data-open:`, ...) that Pipelean's bracket-only
+`data-[state=...]:` vocabulary didn't need to cover.
+
+Demos come from the real `apps/v4/registry/bases/base/examples/*.tsx`
+files (61 of 62 components have one — richer than anything hand-rolled:
+button's alone covers every variant, size, icon position and invalid
+state), run through the same `<IconPlaceholder>` → Phosphor transform as
+the components themselves. Two examples (`message`, `message-scroller`)
+depend on the docs site's own AI-chat demo helpers and were left out
+rather than dragging those in; both components still get a full token
+table, just no live demo.
+
+Verified against the built-and-served app, not just `next build`: swept
+all 62 component pages with a headless browser — 1123 token rows
+extracted (441 of them color roles), zero JavaScript errors. The only
+console noise is a handful of blocked-by-this-sandbox external image
+loads (avatar/card demo placeholders) — a network-policy artifact of
+where this was built, not an app bug.
 
 ## Verified
 
