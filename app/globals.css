@@ -153,11 +153,11 @@
     /* Squircle corners wherever an element actually has a border-radius
        (corner-shape has no visible effect without one) — a rounder,
        more continuous curve than a plain circular radius at the same
-       size. 1.2 is a light touch — noticeably closer to round than the
-       "true" squircle at 2 (the keyword "squircle" itself). Not yet a
-       Tailwind utility, so it's applied as a plain CSS property here
-       rather than via @apply. */
-    corner-shape: superellipse(1.2);
+       size. 1.1 is barely a nudge off round (2 is the "true" squircle,
+       the keyword "squircle" itself). Not yet a Tailwind utility, so
+       it's applied as a plain CSS property here rather than via
+       @apply. */
+    corner-shape: superellipse(1.1);
   }
   body {
     @apply bg-background text-foreground;
