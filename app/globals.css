@@ -146,8 +146,16 @@
 }
 
 @layer base {
-  * {
+  *,
+  ::before,
+  ::after {
     @apply border-border outline-ring/50;
+    /* Squircle corners wherever an element actually has a border-radius
+       (corner-shape has no visible effect without one) — a rounder,
+       more continuous curve than a plain circular radius at the same
+       size. Not yet a Tailwind utility, so it's applied as a plain CSS
+       property here rather than via @apply. */
+    corner-shape: superellipse(2);
   }
   body {
     @apply bg-background text-foreground;
