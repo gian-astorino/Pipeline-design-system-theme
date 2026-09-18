@@ -29,7 +29,7 @@ const CATEGORIES: [string, string[]][] = [
   ["Overlay", ["alert-dialog", "context-menu", "dialog", "drawer", "dropdown-menu", "hover-card", "popover", "sheet", "tooltip"]],
   ["Data display", ["accordion", "avatar", "badge", "calendar", "card", "carousel", "chart", "collapsible", "empty", "item", "kbd", "marker", "table"]],
   ["Feedback", ["alert", "progress", "sonner", "spinner", "toast"]],
-  ["Comunicazione", ["attachment", "bubble", "command", "message", "message-scroller", "questionnaire"]],
+  ["Comunicazione", ["attachment", "bubble", "chat-input", "command", "message", "message-scroller", "questionnaire"]],
   ["Altro", ["direction"]],
 ];
 

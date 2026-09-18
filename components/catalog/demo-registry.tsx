@@ -13,6 +13,7 @@ import CalendarExample from "./demos/calendar-example";
 import CardExample from "./demos/card-example";
 import CarouselExample from "./demos/carousel-example";
 import ChartExample from "./demos/chart-example";
+import ChatInputExample from "./demos/chat-input-example";
 import CheckboxExample from "./demos/checkbox-example";
 import CollapsibleExample from "./demos/collapsible-example";
 import ComboboxExample from "./demos/combobox-example";
@@ -74,6 +75,7 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   "card": CardExample,
   "carousel": CarouselExample,
   "chart": ChartExample,
+  "chat-input": ChatInputExample,
   "checkbox": CheckboxExample,
   "collapsible": CollapsibleExample,
   "combobox": ComboboxExample,
