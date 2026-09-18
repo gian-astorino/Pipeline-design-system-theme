@@ -41,13 +41,16 @@
   --font-heading: var(--font-heading);
   --font-mono: var(--font-mono);
   /* Custom scale (overrides the preset's calc(var(--radius) * N)
-   * multipliers): fixed steps 4/8/12/16/22/28/36px, not derived from
+   * multipliers): fixed steps 4/8/12/18/22/28/36px, not derived from
    * a single --radius multiplied up — 36px (radius-4xl) is now the
-   * largest radius token in the system. */
+   * largest radius token in the system. xl is 18px rather than the
+   * "round" 16 so a 36px-tall pill row (dropdown/context-menu/
+   * menubar/select/combobox/command items — py-2 + text-sm line
+   * height) can use it directly and land exactly on radius=height/2. */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  --radius-xl: 1.125rem;
   --radius-2xl: 1.375rem;
   --radius-3xl: 1.75rem;
   --radius-4xl: 2.25rem;
@@ -166,6 +169,12 @@
 
 @layer base {
   * {
+    /* Explicit here even though Tailwind's own preflight already sets
+     * this on *, ::before, ::after, ::backdrop — border-box means
+     * border/padding are carved out of the declared width/height
+     * instead of added on top of it, so turning a border on/off never
+     * changes an element's outer size. */
+    box-sizing: border-box;
     @apply border-border outline-ring/50;
   }
   body {

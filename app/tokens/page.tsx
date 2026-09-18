@@ -86,7 +86,7 @@ export default function TokensPage() {
         <div>
           <h2 className="text-lg font-semibold">3. Radius</h2>
           <p className="text-sm text-muted-foreground">
-            Scala custom a passi fissi (4 · 8 · 12 · 16 · 22 · 28 · 36px), non
+            Scala custom a passi fissi (4 · 8 · 12 · 18 · 22 · 28 · 36px), non
             moltiplicatori di{" "}
             <code className="rounded bg-muted px-1 py-0.5 text-xs">--radius</code>.
             36px (<code className="rounded bg-muted px-1 py-0.5 text-xs">--radius-4xl</code>)
