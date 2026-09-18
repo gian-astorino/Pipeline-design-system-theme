@@ -517,8 +517,15 @@
      * single-line alert measured 46px instead of the intended 44
      * (py-3=24 + text-sm line-height=20). ring is a box-shadow, so it
      * never contributes to layout size — same fix already used by
-     * Card/Dialog/AlertDialog in this file. */
-    @apply grid gap-0.5 rounded-2xl ring-1 ring-border px-4 py-3 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2.5 has-[>svg]:pl-3 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4;
+     * Card/Dialog/AlertDialog in this file.
+     * has-data-[slot=alert-title]:has-data-[slot=alert-description]:
+     * gates *:[svg]:row-span-2: unconditional row-span-2 forces a
+     * second grid row track even when only title OR only description
+     * is present (0px tall, but gap-0.5's row-gap still applies
+     * between it and the real row), adding a phantom 2px below the
+     * text. Spanning 2 rows only makes sense — and only creates a
+     * real second row — when both slots actually exist. */
+    @apply grid gap-0.5 rounded-2xl ring-1 ring-border px-4 py-3 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2.5 has-[>svg]:pl-3 has-data-[slot=alert-title]:has-data-[slot=alert-description]:*:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4;
   }
 
   .cn-alert-variant-default {
