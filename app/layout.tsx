@@ -2,6 +2,7 @@ import { Inter } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Toaster as SonnerToaster } from "@/components/ui/sonner"
 import { Toaster as ToastToaster } from "@/components/ui/toast"
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           for parity with what the preset actually resolves to. */}
       <body className="style-luma base-color-neutral">
         <ThemeProvider>
+          <ThemeToggle />
           <ToastToaster>{children}</ToastToaster>
           <SonnerToaster />
         </ThemeProvider>
