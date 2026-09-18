@@ -86,9 +86,11 @@ export default function TokensPage() {
         <div>
           <h2 className="text-lg font-semibold">3. Radius</h2>
           <p className="text-sm text-muted-foreground">
-            Diverso da Pipelean: qui i passi sono moltiplicatori di{" "}
-            <code className="rounded bg-muted px-1 py-0.5 text-xs">--radius</code> (×0.6 … ×2.6), non
-            somme/sottrazioni fisse in px.
+            Scala custom a passi fissi (4 · 8 · 12 · 16 · 22 · 28 · 36px), non
+            moltiplicatori di{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">--radius</code>.
+            36px (<code className="rounded bg-muted px-1 py-0.5 text-xs">--radius-4xl</code>)
+            è il radius più grande del sistema.
           </p>
         </div>
         <ScaleTable title="Radius scale" description="Misurata dal vivo con rounded-N." rows={radiusScale} />

@@ -17,7 +17,7 @@ function ChatInput({ className, ...props }: React.ComponentProps<"form">) {
     <form
       data-slot="chat-input"
       className={cn(
-        "flex w-full flex-col gap-1 rounded-3xl bg-popover p-2 text-popover-foreground shadow-lg ring-1 ring-foreground/5 dark:ring-foreground/10",
+        "flex w-full flex-col gap-1 rounded-2xl bg-popover p-2 text-popover-foreground shadow-lg ring-1 ring-foreground/5 dark:ring-foreground/10",
         className
       )}
       {...props}

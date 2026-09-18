@@ -120,13 +120,13 @@ export const spacingScale: ScaleRow[] = [
 ];
 
 export const radiusScale: ScaleRow[] = [
-  { name: "sm", className: "rounded-sm", cssVar: "--radius-sm", prop: "borderRadius", note: "calc(var(--radius) * 0.6)" },
-  { name: "md", className: "rounded-md", cssVar: "--radius-md", prop: "borderRadius", note: "calc(var(--radius) * 0.8)" },
-  { name: "lg", className: "rounded-lg", cssVar: "--radius-lg", prop: "borderRadius", note: "= var(--radius)" },
-  { name: "xl", className: "rounded-xl", cssVar: "--radius-xl", prop: "borderRadius", note: "calc(var(--radius) * 1.4)" },
-  { name: "2xl", className: "rounded-2xl", cssVar: "--radius-2xl", prop: "borderRadius", note: "calc(var(--radius) * 1.8)" },
-  { name: "3xl", className: "rounded-3xl", cssVar: "--radius-3xl", prop: "borderRadius", note: "calc(var(--radius) * 2.2)" },
-  { name: "4xl", className: "rounded-4xl", cssVar: "--radius-4xl", prop: "borderRadius", note: "calc(var(--radius) * 2.6)" },
+  { name: "sm", className: "rounded-sm", cssVar: "--radius-sm", prop: "borderRadius", note: "4px, fisso" },
+  { name: "md", className: "rounded-md", cssVar: "--radius-md", prop: "borderRadius", note: "8px, fisso" },
+  { name: "lg", className: "rounded-lg", cssVar: "--radius-lg", prop: "borderRadius", note: "12px, fisso (= var(--radius))" },
+  { name: "xl", className: "rounded-xl", cssVar: "--radius-xl", prop: "borderRadius", note: "16px, fisso" },
+  { name: "2xl", className: "rounded-2xl", cssVar: "--radius-2xl", prop: "borderRadius", note: "22px, fisso" },
+  { name: "3xl", className: "rounded-3xl", cssVar: "--radius-3xl", prop: "borderRadius", note: "28px, fisso" },
+  { name: "4xl", className: "rounded-4xl", cssVar: "--radius-4xl", prop: "borderRadius", note: "36px, fisso — il radius più grande del sistema" },
   { name: "full", className: "rounded-full", prop: "borderRadius", note: "utility statica, calc(infinity × 1px)" },
 ];
 

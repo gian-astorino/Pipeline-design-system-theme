@@ -40,13 +40,17 @@
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
   --font-mono: var(--font-mono);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  /* Custom scale (overrides the preset's calc(var(--radius) * N)
+   * multipliers): fixed steps 4/8/12/16/22/28/36px, not derived from
+   * a single --radius multiplied up — 36px (radius-4xl) is now the
+   * largest radius token in the system. */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.375rem;
+  --radius-3xl: 1.75rem;
+  --radius-4xl: 2.25rem;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -81,7 +85,11 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  /* No longer read directly (every rounded-* utility now points at its
+   * own fixed --radius-* value above) — kept at the same 0.75rem as
+   * --radius-lg since it's still the shadcn-standard "base radius"
+   * variable name other tooling may expect to find. */
+  --radius: 0.75rem;
 
   /* neutral (baseColor) */
   --background: oklch(1 0 0);
