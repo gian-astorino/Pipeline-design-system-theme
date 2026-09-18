@@ -9,7 +9,18 @@
  * node_modules/shadcn/dist/tailwind.css if the shadcn version bumps.
  */
 @import "./shadcn-tailwind.css";
-@import "./style-luma.css";
+/* layer(base): matches how the real registry imports this file
+ * (apps/v4/app/style-registry.css: `@import ".../style-luma.css"
+ * layer(base);`). Without it every .cn-* rule in style-luma.css lands
+ * as plain, unlayered CSS — which the Cascade Layers spec always
+ * ranks above ANY @layer, including Tailwind's own `utilities` layer,
+ * regardless of selector specificity or source order. That silently
+ * defeated every component-level utility override in the app (e.g.
+ * ButtonGroup's `rounded-r-none`/`rounded-l-none` on its children:
+ * present in the DOM, correctly compiled, and still losing every time
+ * to .cn-button's own rounded-4xl). Layering it puts it back below
+ * `utilities`, where overrides are supposed to win. */
+@import "./style-luma.css" layer(base);
 
 @custom-variant dark (&:is(.dark *));
 
