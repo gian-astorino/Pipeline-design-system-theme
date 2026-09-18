@@ -107,14 +107,24 @@ function DrawerContent({
 
   return (
     <DrawerPortal data-slot="drawer-portal">
-      {modal === true && (
-        <DrawerOverlay data-snap-points={hasSnapPoints ? "" : undefined} />
-      )}
       <DrawerPrimitive.Viewport
         data-slot="drawer-viewport"
         data-modal={modal}
         className="pointer-events-none fixed inset-0 z-50 select-none data-[modal=true]:pointer-events-auto"
       >
+        {/* Nested inside Viewport (already `fixed inset-0`), not a
+         * sibling of it, so the overlay's own inset-0 always resolves
+         * against the viewport-sized fixed box. On real WebKit/iOS —
+         * where `supports-[-webkit-touch-callout:none]` matches and
+         * this switches to `position: absolute` — a sibling overlay's
+         * containing block falls back to the document root (there's
+         * no other positioned ancestor), so inset-0 anchors to the
+         * top of the full scrollable page instead of the viewport:
+         * open the drawer after scrolling down at all and the entire
+         * backdrop renders off-screen, above what's visible. */}
+        {modal === true && (
+          <DrawerOverlay data-snap-points={hasSnapPoints ? "" : undefined} />
+        )}
         <DrawerPrimitive.Popup
           data-slot="drawer-popup"
           data-swipe-axis={swipeAxis}
