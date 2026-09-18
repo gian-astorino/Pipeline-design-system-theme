@@ -152,7 +152,7 @@ function ComboboxItem({
       <ComboboxPrimitive.ItemIndicator
         render={<span className="cn-combobox-item-indicator" />}
       >
-        <Check className="cn-combobox-item-indicator-icon pointer-events-none" />
+        <Check weight="bold" className="cn-combobox-item-indicator-icon pointer-events-none" />
       </ComboboxPrimitive.ItemIndicator>
     </ComboboxPrimitive.Item>
   )

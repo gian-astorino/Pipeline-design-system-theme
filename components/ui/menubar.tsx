@@ -125,7 +125,7 @@ function MenubarCheckboxItem({
     >
       <span className="cn-menubar-checkbox-item-indicator pointer-events-none absolute flex items-center justify-center">
         <MenuPrimitive.CheckboxItemIndicator>
-          <Check />
+          <Check weight="bold" />
         </MenuPrimitive.CheckboxItemIndicator>
       </span>
       {children}
@@ -159,7 +159,7 @@ function MenubarRadioItem({
     >
       <span className="cn-menubar-radio-item-indicator pointer-events-none absolute flex items-center justify-center">
         <MenuPrimitive.RadioItemIndicator>
-          <Check />
+          <Check weight="bold" />
         </MenuPrimitive.RadioItemIndicator>
       </span>
       {children}

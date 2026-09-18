@@ -131,7 +131,7 @@ function SelectItem({
       <SelectPrimitive.ItemIndicator
         render={<span className="cn-select-item-indicator" />}
       >
-        <Check className="cn-select-item-indicator-icon pointer-events-none" />
+        <Check weight="bold" className="cn-select-item-indicator-icon pointer-events-none" />
       </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
   )

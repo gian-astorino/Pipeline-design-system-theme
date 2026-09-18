@@ -128,7 +128,7 @@ function QuestionnaireChoice({
           data-slot="questionnaire-choice-indicator-dot"
           className="cn-questionnaire-choice-indicator-dot hidden rounded-full group-data-[type=checkbox]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block"
         />
-        <Check data-slot="questionnaire-choice-indicator-check" className="cn-questionnaire-choice-indicator-check hidden group-data-[type=radio]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block" />
+        <Check weight="bold" data-slot="questionnaire-choice-indicator-check" className="cn-questionnaire-choice-indicator-check hidden group-data-[type=radio]/questionnaire-choice:hidden group-data-checked/questionnaire-choice:block" />
       </span>
       <QuestionnairePrimitive.ChoiceLabel
         data-slot="questionnaire-choice-label"
