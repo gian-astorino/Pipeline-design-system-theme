@@ -486,7 +486,8 @@
   }
 
   .cn-alert-dialog-content {
-    @apply data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 bg-popover text-popover-foreground ring-foreground/5 dark:ring-foreground/10 gap-6 rounded-2xl p-6 shadow-xl ring-1 duration-100 data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-md;
+    /* Concentric with --radius-xl (18px): p-6 (24px) -> +24px. */
+    @apply data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 bg-popover text-popover-foreground ring-foreground/5 dark:ring-foreground/10 gap-6 rounded-[calc(var(--radius-xl)+1.5rem)] p-6 shadow-xl ring-1 duration-100 data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-md;
   }
 
   .cn-alert-dialog-header {
@@ -735,7 +736,8 @@
   }
 
   .cn-dialog-content {
-    @apply bg-popover text-popover-foreground data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 ring-foreground/5 dark:ring-foreground/10 grid max-w-[calc(100%-2rem)] gap-6 rounded-2xl p-6 text-sm shadow-xl ring-1 duration-100 sm:max-w-md;
+    /* Concentric with --radius-xl (18px): p-6 (24px) -> +24px. */
+    @apply bg-popover text-popover-foreground data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 ring-foreground/5 dark:ring-foreground/10 grid max-w-[calc(100%-2rem)] gap-6 rounded-[calc(var(--radius-xl)+1.5rem)] p-6 text-sm shadow-xl ring-1 duration-100 sm:max-w-md;
   }
 
   .cn-dialog-close {
@@ -1181,7 +1183,11 @@
 
   /* MARK: Popover */
   .cn-popover-content {
-    @apply bg-popover text-popover-foreground data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ring-foreground/5 dark:ring-foreground/10 flex flex-col gap-4 rounded-2xl p-4 text-sm shadow-lg ring-1 duration-100;
+    /* Concentric with the system's 18px item radius (--radius-xl): a
+     * p-4 (16px) padded container gets radius-xl+16px so its own
+     * corner arc shares a center with a content edge sitting 16px in
+     * at 18px radius, same principle as the dropdown/menu family. */
+    @apply bg-popover text-popover-foreground data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ring-foreground/5 dark:ring-foreground/10 flex flex-col gap-4 rounded-[calc(var(--radius-xl)+1rem)] p-4 text-sm shadow-lg ring-1 duration-100;
   }
 
   .cn-popover-content-logical {
@@ -1634,7 +1640,7 @@
   }
 
   .cn-questionnaire-choice {
-    @apply border-input hover:bg-input/40 data-checked:border-primary/40 data-checked:bg-primary/10 data-invalid:border-destructive has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-ring/50 gap-2.5 rounded-2xl border px-4 py-3 text-sm has-[>input:focus-visible]:ring-3;
+    @apply border-input hover:bg-input/40 data-checked:border-primary/40 data-checked:bg-primary/10 data-invalid:border-destructive has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-ring/50 gap-2.5 rounded-xl border px-4 py-3 text-sm has-[>input:focus-visible]:ring-3;
   }
 
   .cn-questionnaire-choice-indicator {
@@ -1666,7 +1672,7 @@
   }
 
   .cn-questionnaire-input {
-    @apply bg-input/50 border-transparent focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-9 rounded-2xl border px-3 py-1 text-base focus-visible:ring-3 aria-invalid:ring-3 md:text-sm;
+    @apply bg-input/50 border-transparent focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-9 rounded-xl border px-3 py-1 text-base focus-visible:ring-3 aria-invalid:ring-3 md:text-sm;
   }
 
   .cn-questionnaire-error {
