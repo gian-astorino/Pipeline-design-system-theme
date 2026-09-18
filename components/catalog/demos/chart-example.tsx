@@ -7,7 +7,10 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Funnel,
+  FunnelChart,
   Label,
+  LabelList,
   Line,
   LineChart,
   Pie,
@@ -37,7 +40,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
-import { TrendUp } from "@phosphor-icons/react"
+import { TrendDown, TrendUp } from "@phosphor-icons/react"
 
 const areaChartData = [
   { month: "January", desktop: 186 },
@@ -64,6 +67,7 @@ export default function ChartExample() {
       <ChartPieExample />
       <ChartRadialExample />
       <ChartRadarExample />
+      <ChartFunnelExample />
     </ExampleWrapper>
   )
 }
@@ -529,6 +533,116 @@ function ChartRadialExample() {
           </div>
           <div className="leading-none text-muted-foreground">
             Showing total visitors for the last 6 months
+          </div>
+        </CardFooter>
+      </Card>
+    </Example>
+  )
+}
+
+// Stage order doubles as the sequential ramp: chart-1 (lightest) ->
+// chart-5 (darkest) is one hue getting progressively deeper, so it
+// reads as "further down the funnel" rather than "different category."
+const funnelStages = [
+  { key: "visits", name: "Visits", value: 5400 },
+  { key: "signups", name: "Signups", value: 3600 },
+  { key: "activated", name: "Activated", value: 2000 },
+  { key: "trial", name: "Trial", value: 980 },
+  { key: "purchase", name: "Purchase", value: 640 },
+] as const
+
+const funnelChartData = funnelStages.map((stage, i) => {
+  const previous = funnelStages[i - 1]
+  const dropPct = previous
+    ? Math.round(((previous.value - stage.value) / previous.value) * 100)
+    : null
+  return {
+    ...stage,
+    fill: `var(--color-${stage.key})`,
+    valueLabel:
+      dropPct === null
+        ? stage.value.toLocaleString()
+        : `${stage.value.toLocaleString()} (-${dropPct}%)`,
+  }
+})
+
+const funnelChartConfig = {
+  value: {
+    label: "Users",
+  },
+  visits: {
+    label: "Visits",
+    color: "var(--chart-1)",
+  },
+  signups: {
+    label: "Signups",
+    color: "var(--chart-2)",
+  },
+  activated: {
+    label: "Activated",
+    color: "var(--chart-3)",
+  },
+  trial: {
+    label: "Trial",
+    color: "var(--chart-4)",
+  },
+  purchase: {
+    label: "Purchase",
+    color: "var(--chart-5)",
+  },
+} satisfies ChartConfig
+
+function ChartFunnelExample() {
+  const overallConversion = Math.round(
+    (funnelChartData[funnelChartData.length - 1].value /
+      funnelChartData[0].value) *
+      100
+  )
+
+  return (
+    <Example title="Funnel Chart">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Funnel Chart - Conversion</CardTitle>
+          <CardDescription>
+            Visits to purchase, with drop-off between each stage
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={funnelChartConfig} className="h-[300px] w-full">
+            <FunnelChart margin={{ top: 8, right: 90, bottom: 8, left: 90 }}>
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel nameKey="name" />}
+              />
+              <Funnel data={funnelChartData} dataKey="value" nameKey="name">
+                <LabelList
+                  position="left"
+                  dataKey="name"
+                  fill="var(--foreground)"
+                  stroke="none"
+                  fontSize={12}
+                  offset={12}
+                />
+                <LabelList
+                  position="right"
+                  dataKey="valueLabel"
+                  fill="var(--muted-foreground)"
+                  stroke="none"
+                  fontSize={12}
+                  offset={12}
+                />
+              </Funnel>
+            </FunnelChart>
+          </ChartContainer>
+        </CardContent>
+        <CardFooter className="flex-col gap-2">
+          <div className="flex items-center gap-2 leading-none font-medium">
+            {overallConversion}% overall conversion to purchase{" "}
+            <TrendDown className="size-4" />
+          </div>
+          <div className="leading-none text-muted-foreground">
+            Biggest drop-off is Activated to Trial
           </div>
         </CardFooter>
       </Card>
