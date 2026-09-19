@@ -6,6 +6,10 @@ import { cn } from "cn"
 
 import { CaretDown, CaretUp, Check } from "@phosphor-icons/react"
 
+import { MenuHighlight } from "@/components/ui/menu-highlight"
+
+const SELECT_ITEM_SELECTOR = '[data-slot="select-item"]'
+
 const Select = SelectPrimitive.Root
 
 function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
@@ -70,6 +74,8 @@ function SelectContent({
     SelectPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
   >) {
+  const contentRef = React.useRef<HTMLDivElement>(null)
+
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Positioner
@@ -81,6 +87,7 @@ function SelectContent({
         className="isolate z-50"
       >
         <SelectPrimitive.Popup
+          ref={contentRef}
           data-slot="select-content"
           data-align-trigger={alignItemWithTrigger}
           className={cn(
@@ -89,6 +96,10 @@ function SelectContent({
           )}
           {...props}
         >
+          <MenuHighlight
+            containerRef={contentRef}
+            itemSelector={SELECT_ITEM_SELECTOR}
+          />
           <SelectScrollUpButton />
           <SelectPrimitive.List>{children}</SelectPrimitive.List>
           <SelectScrollDownButton />

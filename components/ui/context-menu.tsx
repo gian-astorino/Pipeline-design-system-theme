@@ -6,6 +6,11 @@ import { cn } from "cn"
 
 import { CaretRight, Check } from "@phosphor-icons/react"
 
+import { MenuHighlight } from "@/components/ui/menu-highlight"
+
+const CONTEXT_MENU_ITEM_SELECTOR =
+  '[data-slot="context-menu-item"], [data-slot="context-menu-checkbox-item"], [data-slot="context-menu-radio-item"], [data-slot="context-menu-sub-trigger"]'
+
 function ContextMenu({ ...props }: ContextMenuPrimitive.Root.Props) {
   return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />
 }
@@ -35,12 +40,15 @@ function ContextMenuContent({
   alignOffset = 4,
   side = "right",
   sideOffset = 0,
+  children,
   ...props
 }: ContextMenuPrimitive.Popup.Props &
   Pick<
     ContextMenuPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
   >) {
+  const contentRef = React.useRef<HTMLDivElement>(null)
+
   return (
     <ContextMenuPrimitive.Portal>
       <ContextMenuPrimitive.Positioner
@@ -51,13 +59,20 @@ function ContextMenuContent({
         sideOffset={sideOffset}
       >
         <ContextMenuPrimitive.Popup
+          ref={contentRef}
           data-slot="context-menu-content"
           className={cn(
             "cn-context-menu-content cn-context-menu-content-logical cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none",
             className
           )}
           {...props}
-        />
+        >
+          <MenuHighlight
+            containerRef={contentRef}
+            itemSelector={CONTEXT_MENU_ITEM_SELECTOR}
+          />
+          {children}
+        </ContextMenuPrimitive.Popup>
       </ContextMenuPrimitive.Positioner>
     </ContextMenuPrimitive.Portal>
   )

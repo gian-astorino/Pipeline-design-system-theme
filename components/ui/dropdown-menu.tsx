@@ -6,6 +6,14 @@ import { cn } from "cn"
 
 import { CaretRight, Check } from "@phosphor-icons/react"
 
+import { MenuHighlight } from "@/components/ui/menu-highlight"
+
+// Menubar's Content/Item components (components/ui/menubar.tsx) render
+// through this same DropdownMenuContent — they only swap data-slot to
+// "menubar-*" on the way through — so this selector covers both.
+const DROPDOWN_MENU_ITEM_SELECTOR =
+  '[data-slot="dropdown-menu-item"], [data-slot="dropdown-menu-checkbox-item"], [data-slot="dropdown-menu-radio-item"], [data-slot="dropdown-menu-sub-trigger"], [data-slot="menubar-item"], [data-slot="menubar-checkbox-item"], [data-slot="menubar-radio-item"], [data-slot="menubar-sub-trigger"]'
+
 function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
   return <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />
 }
@@ -24,12 +32,15 @@ function DropdownMenuContent({
   side = "bottom",
   sideOffset = 4,
   className,
+  children,
   ...props
 }: MenuPrimitive.Popup.Props &
   Pick<
     MenuPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
   >) {
+  const contentRef = React.useRef<HTMLDivElement>(null)
+
   return (
     <MenuPrimitive.Portal>
       <MenuPrimitive.Positioner
@@ -40,13 +51,20 @@ function DropdownMenuContent({
         sideOffset={sideOffset}
       >
         <MenuPrimitive.Popup
+          ref={contentRef}
           data-slot="dropdown-menu-content"
           className={cn(
             "cn-dropdown-menu-content cn-dropdown-menu-content-logical cn-menu-target cn-menu-translucent z-50 max-h-(--available-height) w-(--anchor-width) origin-(--transform-origin) overflow-x-hidden overflow-y-auto outline-none data-closed:overflow-hidden",
             className
           )}
           {...props}
-        />
+        >
+          <MenuHighlight
+            containerRef={contentRef}
+            itemSelector={DROPDOWN_MENU_ITEM_SELECTOR}
+          />
+          {children}
+        </MenuPrimitive.Popup>
       </MenuPrimitive.Positioner>
     </MenuPrimitive.Portal>
   )

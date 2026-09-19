@@ -1,4 +1,18 @@
 .style-luma {
+  /* MARK: Menu Highlight */
+  /* Shared sliding hover box for DropdownMenu/ContextMenu/Menubar/Select
+   * items — see components/ui/menu-highlight.tsx. rounded-xl matches
+   * every menu-family item's own radius (all set to --radius-xl this
+   * session for the 36px pill rows), so the box reads as the item's own
+   * background, not a separate shape sliding behind it. */
+  .cn-menu-highlight {
+    @apply bg-accent pointer-events-none absolute top-0 left-0 z-0 rounded-xl opacity-0 transition-[transform,width,height,opacity] duration-150 ease-out;
+  }
+
+  .cn-menu-highlight[data-variant="destructive"] {
+    @apply bg-destructive/10 dark:bg-destructive/20;
+  }
+
   /* MARK: Slider */
   .cn-slider {
     @apply data-vertical:min-h-40;
@@ -683,7 +697,7 @@
 
   /* MARK: Context Menu */
   .cn-context-menu-content {
-    @apply data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ring-foreground/5 dark:ring-foreground/10 bg-popover text-popover-foreground min-w-48 rounded-[calc(var(--radius-xl)+0.375rem)] p-1.5 shadow-lg ring-1 duration-100;
+    @apply data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ring-foreground/5 dark:ring-foreground/10 bg-popover text-popover-foreground relative min-w-48 rounded-[calc(var(--radius-xl)+0.375rem)] p-1.5 shadow-lg ring-1 duration-100;
   }
 
   .cn-context-menu-content-logical {
@@ -807,7 +821,9 @@
 
   /* MARK: Dropdown Menu */
   .cn-dropdown-menu-content {
-    @apply data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ring-foreground/5 dark:ring-foreground/10 bg-popover text-popover-foreground min-w-48 rounded-[calc(var(--radius-xl)+0.375rem)] p-1.5 shadow-lg ring-1 duration-100;
+    /* relative: the .cn-menu-highlight child needs this as its
+     * absolute-positioning containing block, so it tracks scroll. */
+    @apply data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 ring-foreground/5 dark:ring-foreground/10 bg-popover text-popover-foreground relative min-w-48 rounded-[calc(var(--radius-xl)+0.375rem)] p-1.5 shadow-lg ring-1 duration-100;
   }
 
   .cn-dropdown-menu-content-logical {
@@ -1765,4 +1781,29 @@
   .cn-dropdown-menu-sub-content-aria {
     @apply ring-foreground/5 dark:ring-foreground/10 bg-popover text-popover-foreground min-w-36 rounded-3xl p-1.5 shadow-lg ring-1 duration-100;
   }
+}
+
+/* MARK: Menu Highlight — mouse-modality suppression
+ * Outside .style-luma on purpose: data-input-modality lives on <html>,
+ * an ANCESTOR of body.style-luma, so it can't be reached by nesting
+ * inside that block. While the last input was a mouse, MenuHighlight
+ * (components/ui/menu-highlight.tsx) already shows the sliding box for
+ * these items, so their own instant :focus background is turned off
+ * here to avoid the two stacking. Keyboard navigation is untouched —
+ * data-input-modality flips back to "keyboard" on arrow/Tab, restoring
+ * the plain instant highlight from each component's own CSS above. */
+html[data-input-modality="mouse"] .style-luma .cn-dropdown-menu-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-dropdown-menu-checkbox-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-dropdown-menu-radio-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-dropdown-menu-sub-trigger:focus,
+html[data-input-modality="mouse"] .style-luma .cn-context-menu-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-context-menu-checkbox-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-context-menu-radio-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-context-menu-sub-trigger:focus,
+html[data-input-modality="mouse"] .style-luma .cn-menubar-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-menubar-checkbox-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-menubar-radio-item:focus,
+html[data-input-modality="mouse"] .style-luma .cn-menubar-sub-trigger:focus,
+html[data-input-modality="mouse"] .style-luma .cn-select-item:focus {
+  background-color: transparent;
 }
