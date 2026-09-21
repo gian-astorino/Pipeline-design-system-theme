@@ -40,7 +40,24 @@
   }
 
   .cn-switch-thumb {
-    @apply bg-background dark:data-unchecked:bg-foreground dark:data-checked:bg-primary-foreground rounded-full shadow-sm group-data-[size=default]/switch:h-4 group-data-[size=default]/switch:w-6 group-data-[size=sm]/switch:h-3 group-data-[size=sm]/switch:w-4 data-checked:translate-x-[calc(100%-8px)] data-unchecked:translate-x-0 not-dark:bg-clip-padding;
+    /* group-active/switch:scale-[0.94]: same press-shrink treatment
+     * as Button (.cn-button above) — translate (the checked/unchecked
+     * slide) and scale (press) are independent CSS properties, so
+     * they compose without fighting each other. No bounce/overshoot,
+     * just a plain ease back to 1 on release. */
+    @apply bg-background dark:data-unchecked:bg-foreground dark:data-checked:bg-primary-foreground rounded-full shadow-sm group-data-[size=default]/switch:h-4 group-data-[size=default]/switch:w-6 group-data-[size=sm]/switch:h-3 group-data-[size=sm]/switch:w-4 data-checked:translate-x-[calc(100%-8px)] data-unchecked:translate-x-0 not-dark:bg-clip-padding group-active/switch:scale-[0.94];
+    transition:
+      translate 150ms,
+      background-color 150ms,
+      scale 200ms ease-out;
+    will-change: transform;
+  }
+
+  .group\/switch:active .cn-switch-thumb {
+    transition:
+      translate 150ms,
+      background-color 150ms,
+      scale 80ms ease-out;
   }
 
   .cn-switch-thumb-aria {
@@ -88,22 +105,19 @@
      * The inverse scale on .cn-button-content (the label/icon
      * wrapper, the button's sole child) cancels it out there, so the
      * shrink reads on the container only, not on the label or icon.
-     *
-     * Two different transitions, not one: pressing down (below) is
-     * quick and linear so it feels responsive; releasing uses the
-     * spring-ish overshoot cubic-bezier below so it settles back with
-     * a visible bounce instead of just stopping. CSS transitions use
-     * the target state's own transition config, so this base rule's
-     * `transition` governs the release, and :active's governs the
-     * press — same reason transition-all in button.tsx was dropped:
-     * that utilities-layer class would've beaten this either way. */
+     * No bounce/overshoot — press is quick, release just eases back
+     * to 1 plainly. CSS transitions use the target state's own
+     * transition config, so this base rule's `transition` governs
+     * the release, and :active's governs the press — same reason
+     * transition-all in button.tsx was dropped: that utilities-layer
+     * class would've beaten this either way. */
     @apply focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-4xl border border-transparent bg-clip-padding text-sm font-medium focus-visible:ring-3 aria-invalid:ring-3 active:not-aria-[haspopup]:scale-[0.94] [&_svg:not([class*='size-'])]:size-4;
     transition:
       color 150ms,
       background-color 150ms,
       border-color 150ms,
       box-shadow 150ms,
-      scale 500ms cubic-bezier(0.18, 1.6, 0.4, 1);
+      scale 200ms ease-out;
   }
 
   .cn-button:active:not([aria-haspopup]) {
@@ -112,7 +126,7 @@
       background-color 150ms,
       border-color 150ms,
       box-shadow 150ms,
-      scale 60ms ease-out;
+      scale 80ms ease-out;
   }
 
   .cn-button-content {
@@ -120,12 +134,19 @@
     /* Mirrors .cn-button's own release/press transitions above so the
      * counter-scale stays exactly in sync — any timing mismatch here
      * would show up as the label/icon visibly swimming against the
-     * container mid-animation. */
-    transition: scale 500ms cubic-bezier(0.18, 1.6, 0.4, 1);
+     * container mid-animation.
+     * will-change: keeps this permanently on its own compositor
+     * layer instead of only while scale is actively transitioning —
+     * without it, the browser promotes/demotes the layer right as
+     * the animation starts/ends, and text can re-rasterize at a
+     * very slightly different subpixel offset on that handoff,
+     * reading as a ~1px jump right after the animation settles. */
+    transition: scale 200ms ease-out;
+    will-change: transform;
   }
 
   .group\/button:active:not([aria-haspopup]) .cn-button-content {
-    transition: scale 60ms ease-out;
+    transition: scale 80ms ease-out;
   }
 
   .cn-button-variant-default {
