@@ -3,7 +3,13 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
 
 const buttonVariants = cva(
-  "cn-button group/button inline-flex shrink-0 items-center justify-center whitespace-nowrap transition-all outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  // No transition-all here: .cn-button in style-luma.css sets its own
+  // explicit `transition` (a Tailwind utilities-layer class like
+  // transition-all would win over anything set in that base-layer rule
+  // regardless of source order — the same cascade-layer trap fixed
+  // earlier for ButtonGroup — so the press animation's spring easing
+  // has to be the only thing driving this element's transitions).
+  "cn-button group/button inline-flex shrink-0 items-center justify-center whitespace-nowrap outline-none select-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
