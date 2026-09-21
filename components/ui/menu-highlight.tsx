@@ -113,12 +113,28 @@ function MenuHighlight({
       highlight!.style.opacity = "0"
     }
 
+    // The container itself plays the popup's entrance animation
+    // (data-open:animate-in, scaling up from 90%). If a pointermove
+    // lands on an item while that's still mid-flight (guaranteed for
+    // an item-aligned Select, since the selected item appears exactly
+    // under the already-resting cursor), moveTo() snapshots a
+    // too-small itemRect — and since onPointerMove no-ops once
+    // item === activeItem, that stale size sticks even after the
+    // popup finishes growing. Re-measuring once the container's own
+    // animation ends refreshes it against the settled layout.
+    function onAnimationEnd(event: AnimationEvent) {
+      if (event.target !== container || !activeItem) return
+      moveTo(activeItem)
+    }
+
     container.addEventListener("pointermove", onPointerMove)
     container.addEventListener("pointerleave", onPointerLeave)
+    container.addEventListener("animationend", onAnimationEnd)
     window.addEventListener(RESET_EVENT, onReset)
     return () => {
       container.removeEventListener("pointermove", onPointerMove)
       container.removeEventListener("pointerleave", onPointerLeave)
+      container.removeEventListener("animationend", onAnimationEnd)
       window.removeEventListener(RESET_EVENT, onReset)
     }
   }, [containerRef, itemSelector])
