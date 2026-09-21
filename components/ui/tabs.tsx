@@ -12,7 +12,19 @@ function Tabs({
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
-      data-orientation={orientation}
+      // orientation was previously destructured out and only ever
+      // reapplied as a manual data-orientation override below — the
+      // real prop never reached the primitive, so base-ui's own
+      // internal orientation state (which List/Tab/Indicator's
+      // real behavior depends on, not just this DOM attribute) stayed
+      // "horizontal" regardless of what was passed in. Harmless while
+      // nothing read that internal state, but TabsIndicator's
+      // --active-tab-top/height vs. --active-tab-left/width math
+      // does, so a "vertical" Tabs rendered a horizontal-shaped
+      // indicator. Passing the prop through lets base-ui set its own
+      // data-orientation correctly too, so the manual override isn't
+      // needed either.
+      orientation={orientation}
       className={cn(
         "cn-tabs group/tabs flex data-horizontal:flex-col",
         className
@@ -40,13 +52,30 @@ const tabsListVariants = cva(
 function TabsList({
   className,
   variant = "default",
+  children,
   ...props
 }: TabsPrimitive.List.Props & VariantProps<typeof tabsListVariants>) {
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
       data-variant={variant}
-      className={cn(tabsListVariants({ variant }), className)}
+      className={cn(tabsListVariants({ variant }), "relative", className)}
+      {...props}
+    >
+      <TabsIndicator />
+      {children}
+    </TabsPrimitive.List>
+  )
+}
+
+function TabsIndicator({
+  className,
+  ...props
+}: TabsPrimitive.Indicator.Props) {
+  return (
+    <TabsPrimitive.Indicator
+      data-slot="tabs-indicator"
+      className={cn("cn-tabs-indicator", className)}
       {...props}
     />
   )
@@ -57,10 +86,15 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
     <TabsPrimitive.Tab
       data-slot="tabs-trigger"
       className={cn(
-        "cn-tabs-trigger relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
-        "group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent",
-        "data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
-        "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+        // relative: needed even though this trigger no longer paints
+        // its own background — .cn-tabs-indicator (a sibling, DOM-
+        // first inside TabsList) is absolutely positioned, and an
+        // unpositioned/static trigger would paint in an earlier
+        // stacking bucket than that positioned sibling regardless of
+        // DOM order, putting the indicator on top of the tab's own
+        // text instead of behind it.
+        "cn-tabs-trigger relative z-10 inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center whitespace-nowrap text-foreground/60 transition-colors group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 dark:text-muted-foreground dark:hover:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "data-active:text-foreground dark:data-active:text-foreground",
         className
       )}
       {...props}
@@ -78,4 +112,11 @@ function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
   )
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
+export {
+  Tabs,
+  TabsList,
+  TabsIndicator,
+  TabsTrigger,
+  TabsContent,
+  tabsListVariants,
+}

@@ -507,6 +507,38 @@
     @apply gap-2 rounded-full border border-transparent! px-3 py-1 text-sm font-medium group-data-vertical/tabs:px-3 group-data-vertical/tabs:py-1.5 group-data-vertical/tabs:rounded-2xl [&_svg:not([class*='size-'])]:size-4 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2;
   }
 
+  /* The shared "thumb": base-ui's Tabs.Indicator tracks the active
+   * tab's box automatically via --active-tab-* custom properties (set
+   * on this element itself), so sliding is native — no JS position-
+   * tracking of our own, unlike .cn-menu-highlight above. Two shapes
+   * off the same element: a full-height pill for the default variant,
+   * a thin bar for the line variant, each read from the matching
+   * pair of --active-tab-* vars for the current orientation.
+   * group-active/tabs-list:scale-[0.94]: same press-shrink treatment
+   * as Button/Switch — :active bubbles from a pressed tab up to the
+   * list, and left/top/width/height (position) are independent of
+   * scale (press), so they don't fight each other mid-slide. */
+  .cn-tabs-indicator {
+    @apply bg-background dark:bg-input/30 dark:border dark:border-input absolute rounded-full shadow-sm group-active/tabs-list:scale-[0.94] not-group-data-[variant=line]/tabs-list:data-[orientation=horizontal]:top-0 not-group-data-[variant=line]/tabs-list:data-[orientation=horizontal]:h-full not-group-data-[variant=line]/tabs-list:data-[orientation=horizontal]:left-(--active-tab-left) not-group-data-[variant=line]/tabs-list:data-[orientation=horizontal]:w-(--active-tab-width) not-group-data-[variant=line]/tabs-list:data-[orientation=vertical]:left-0 not-group-data-[variant=line]/tabs-list:data-[orientation=vertical]:w-full not-group-data-[variant=line]/tabs-list:data-[orientation=vertical]:top-(--active-tab-top) not-group-data-[variant=line]/tabs-list:data-[orientation=vertical]:h-(--active-tab-height) group-data-[variant=line]/tabs-list:rounded-none group-data-[variant=line]/tabs-list:border-none group-data-[variant=line]/tabs-list:bg-foreground group-data-[variant=line]/tabs-list:shadow-none group-data-[variant=line]/tabs-list:dark:bg-foreground group-data-[variant=line]/tabs-list:data-[orientation=horizontal]:bottom-[-5px] group-data-[variant=line]/tabs-list:data-[orientation=horizontal]:h-0.5 group-data-[variant=line]/tabs-list:data-[orientation=horizontal]:left-(--active-tab-left) group-data-[variant=line]/tabs-list:data-[orientation=horizontal]:w-(--active-tab-width) group-data-[variant=line]/tabs-list:data-[orientation=vertical]:right-[-4px] group-data-[variant=line]/tabs-list:data-[orientation=vertical]:w-0.5 group-data-[variant=line]/tabs-list:data-[orientation=vertical]:top-(--active-tab-top) group-data-[variant=line]/tabs-list:data-[orientation=vertical]:h-(--active-tab-height);
+    transition:
+      left 200ms ease-out,
+      top 200ms ease-out,
+      width 200ms ease-out,
+      height 200ms ease-out,
+      background-color 150ms,
+      scale 200ms ease-out;
+  }
+
+  .group\/tabs-list:active .cn-tabs-indicator {
+    transition:
+      left 200ms ease-out,
+      top 200ms ease-out,
+      width 200ms ease-out,
+      height 200ms ease-out,
+      background-color 150ms,
+      scale 80ms ease-out;
+  }
+
   .cn-tabs-content {
     @apply text-sm;
   }
