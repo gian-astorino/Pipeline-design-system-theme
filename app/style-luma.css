@@ -83,7 +83,7 @@
 
   /* MARK: Button */
   .cn-button {
-    /* active:scale-[0.97]: the container shrinks on press, centered
+    /* active:scale-[0.94]: the container shrinks on press, centered
      * (transform-origin defaults to center — no translate involved).
      * The inverse scale on .cn-button-content (the label/icon
      * wrapper, the button's sole child) cancels it out there, so the
@@ -92,18 +92,18 @@
      * Two different transitions, not one: pressing down (below) is
      * quick and linear so it feels responsive; releasing uses the
      * spring-ish overshoot cubic-bezier below so it settles back with
-     * a little bounce instead of just stopping. CSS transitions use
+     * a visible bounce instead of just stopping. CSS transitions use
      * the target state's own transition config, so this base rule's
      * `transition` governs the release, and :active's governs the
      * press — same reason transition-all in button.tsx was dropped:
      * that utilities-layer class would've beaten this either way. */
-    @apply focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-4xl border border-transparent bg-clip-padding text-sm font-medium focus-visible:ring-3 aria-invalid:ring-3 active:not-aria-[haspopup]:scale-[0.97] [&_svg:not([class*='size-'])]:size-4;
+    @apply focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-4xl border border-transparent bg-clip-padding text-sm font-medium focus-visible:ring-3 aria-invalid:ring-3 active:not-aria-[haspopup]:scale-[0.94] [&_svg:not([class*='size-'])]:size-4;
     transition:
       color 150ms,
       background-color 150ms,
       border-color 150ms,
       box-shadow 150ms,
-      scale 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      scale 500ms cubic-bezier(0.18, 1.6, 0.4, 1);
   }
 
   .cn-button:active:not([aria-haspopup]) {
@@ -112,20 +112,20 @@
       background-color 150ms,
       border-color 150ms,
       box-shadow 150ms,
-      scale 100ms ease-out;
+      scale 60ms ease-out;
   }
 
   .cn-button-content {
-    @apply group-active/button:not-group-aria-[haspopup]/button:scale-[calc(1/0.97)] inline-flex items-center justify-center gap-(--button-gap);
+    @apply group-active/button:not-group-aria-[haspopup]/button:scale-[calc(1/0.94)] inline-flex items-center justify-center gap-(--button-gap);
     /* Mirrors .cn-button's own release/press transitions above so the
      * counter-scale stays exactly in sync — any timing mismatch here
      * would show up as the label/icon visibly swimming against the
      * container mid-animation. */
-    transition: scale 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: scale 500ms cubic-bezier(0.18, 1.6, 0.4, 1);
   }
 
   .group\/button:active:not([aria-haspopup]) .cn-button-content {
-    transition: scale 100ms ease-out;
+    transition: scale 60ms ease-out;
   }
 
   .cn-button-variant-default {
