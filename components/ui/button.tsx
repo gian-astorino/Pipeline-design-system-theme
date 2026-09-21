@@ -36,6 +36,7 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  children,
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
   return (
@@ -43,7 +44,15 @@ function Button({
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {/* Press scales the button itself down slightly (.cn-button's
+       * active:scale-*); this inner wrapper carries the inverse scale
+       * so the shrink reads on the container only, not on the label
+       * or icon — see .cn-button-content in style-luma.css. */}
+      <span data-slot="button-content" className="cn-button-content">
+        {children}
+      </span>
+    </ButtonPrimitive>
   )
 }
 
