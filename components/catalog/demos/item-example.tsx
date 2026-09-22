@@ -1,7 +1,9 @@
 import Image from "next/image"
 
 import { Example, ExampleWrapper } from "@/components/catalog/example"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Item,
   ItemActions,
@@ -43,6 +45,7 @@ export default function ItemExample() {
       <OutlineVariantItemsWithImageSmall />
       <OutlineVariantItemsWithImageExtraSmall />
       <MutedVariantItemsWithImage />
+      <ClaimableBalanceCard />
     </ExampleWrapper>
   )
 }
@@ -1725,6 +1728,65 @@ function MutedVariantItemsWithImage() {
           <Button size="sm">Download</Button>
         </ItemActions>
       </Item>
+    </Example>
+  )
+}
+
+function ClaimableBalanceCard() {
+  return (
+    <Example title="Claimable Balance">
+      <Card className="mx-auto w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Claimable Balance</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <span className="text-4xl font-semibold tracking-tight">
+              $0.00
+            </span>
+            <Badge variant="outline" className="w-fit gap-1.5">
+              <span className="size-1.5 rounded-full bg-amber-500" />
+              Pending Setup
+            </Badge>
+          </div>
+          <div className="rounded-xl bg-muted/50">
+            <ItemGroup className="gap-0">
+              <Item size="sm">
+                <ItemContent>
+                  <ItemTitle className="text-muted-foreground font-normal">
+                    Net Royalties
+                  </ItemTitle>
+                </ItemContent>
+                <ItemActions>$0.00</ItemActions>
+              </Item>
+              <Item size="sm">
+                <ItemContent>
+                  <ItemTitle className="text-muted-foreground font-normal">
+                    Processing Fee
+                  </ItemTitle>
+                </ItemContent>
+                <ItemActions>-$0.00</ItemActions>
+              </Item>
+              <ItemSeparator className="my-0" />
+              <Item size="sm">
+                <ItemContent>
+                  <ItemTitle className="font-semibold">
+                    Total Ready to Claim
+                  </ItemTitle>
+                </ItemContent>
+                <ItemActions className="font-semibold">
+                  $0.00 USD
+                </ItemActions>
+              </Item>
+            </ItemGroup>
+          </div>
+          <p className="text-muted-foreground text-sm">
+            Once your bank is connected, balances over $10.00 are
+            automatically eligible for monthly distribution on the 15th of
+            each month.
+          </p>
+        </CardContent>
+      </Card>
     </Example>
   )
 }
