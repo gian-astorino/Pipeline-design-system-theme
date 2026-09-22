@@ -3,7 +3,7 @@
 Next.js 16 + Tailwind v4, scaffolded to match what
 `shadcn@latest init --preset b1aIcFPlK --template next` would have produced.
 
-Live: https://gian-astorino.github.io/pipeline-design-system-theme/ (static
+Live: https://gian-astorino.github.io/Pipeline-design-system-theme/ (static
 export via GitHub Pages, `.github/workflows/deploy-pages.yml`, redeploys on
 every push to `main`).
 
