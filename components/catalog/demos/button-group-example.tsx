@@ -225,13 +225,13 @@ function ButtonGroupWithIcons() {
     <Example title="With Icons">
       <div className="flex flex-col gap-4">
         <ButtonGroup>
-          <Button variant="outline">
+          <Button variant="secondary">
             <ArrowsHorizontal />
           </Button>
-          <Button variant="outline">
+          <Button variant="secondary">
             <ArrowsVertical />
           </Button>
-          <Button variant="outline">
+          <Button variant="secondary">
             <ArrowClockwise />
           </Button>
         </ButtonGroup>
@@ -421,10 +421,10 @@ function ButtonGroupPaginationSplit() {
           </Button>
         </ButtonGroup>
         <ButtonGroup>
-          <Button variant="outline" size="icon-xs">
+          <Button variant="secondary" size="icon-xs">
             <ArrowLeft />
           </Button>
-          <Button variant="outline" size="icon-xs">
+          <Button variant="secondary" size="icon-xs">
             <ArrowRight />
           </Button>
         </ButtonGroup>
@@ -438,15 +438,15 @@ function ButtonGroupNavigation() {
     <Example title="Navigation">
       <ButtonGroup>
         <ButtonGroup>
-          <Button variant="outline">
+          <Button variant="secondary">
             <ArrowLeft />
           </Button>
-          <Button variant="outline">
+          <Button variant="secondary">
             <ArrowRight />
           </Button>
         </ButtonGroup>
         <ButtonGroup aria-label="Single navigation button">
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <ArrowLeft />
           </Button>
         </ButtonGroup>
@@ -488,10 +488,10 @@ function ButtonGroupVertical() {
           aria-label="Media controls"
           className="h-fit"
         >
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <Plus />
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <Minus />
           </Button>
         </ButtonGroup>
@@ -505,29 +505,29 @@ function ButtonGroupVerticalNested() {
     <Example title="Vertical Nested">
       <ButtonGroup orientation="vertical" aria-label="Design tools palette">
         <ButtonGroup orientation="vertical">
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <MagnifyingGlass />
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <Copy />
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <Share />
           </Button>
         </ButtonGroup>
         <ButtonGroup orientation="vertical">
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <ArrowsHorizontal />
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <ArrowsVertical />
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <ArrowClockwise />
           </Button>
         </ButtonGroup>
         <ButtonGroup>
-          <Button variant="outline" size="icon">
+          <Button variant="secondary" size="icon">
             <Trash />
           </Button>
         </ButtonGroup>
