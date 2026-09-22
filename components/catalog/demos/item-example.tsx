@@ -1749,9 +1749,9 @@ function ClaimableBalanceCard() {
               Pending Setup
             </Badge>
           </div>
-          <div className="rounded-xl bg-muted/50">
+          <div className="rounded-xl bg-muted/50 px-3.5">
             <ItemGroup className="gap-0">
-              <Item size="sm">
+              <Item size="sm" className="px-0">
                 <ItemContent>
                   <ItemTitle className="text-muted-foreground font-normal">
                     Net Royalties
@@ -1759,7 +1759,7 @@ function ClaimableBalanceCard() {
                 </ItemContent>
                 <ItemActions>$0.00</ItemActions>
               </Item>
-              <Item size="sm">
+              <Item size="sm" className="px-0">
                 <ItemContent>
                   <ItemTitle className="text-muted-foreground font-normal">
                     Processing Fee
@@ -1768,7 +1768,7 @@ function ClaimableBalanceCard() {
                 <ItemActions>-$0.00</ItemActions>
               </Item>
               <ItemSeparator className="my-0" />
-              <Item size="sm">
+              <Item size="sm" className="px-0">
                 <ItemContent>
                   <ItemTitle className="font-semibold">
                     Total Ready to Claim
