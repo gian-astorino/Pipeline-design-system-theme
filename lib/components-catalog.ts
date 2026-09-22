@@ -21,7 +21,7 @@ function titleFromSlug(slug: string): string {
  *  together while browsing. */
 const CATEGORIES: [string, string[]][] = [
   ["Layout", ["aspect-ratio", "resizable", "scroll-area", "separator", "sidebar", "skeleton"]],
-  ["Navigazione", ["breadcrumb", "menubar", "navigation-menu", "pagination", "tabs"]],
+  ["Navigazione", ["breadcrumb", "menubar", "navigation-menu", "pagination", "tabs", "title-bar"]],
   ["Form & Input", [
     "button", "button-group", "checkbox", "combobox", "field", "input", "input-group",
     "input-otp", "label", "native-select", "radio-group", "select", "slider", "switch", "textarea", "toggle", "toggle-group",

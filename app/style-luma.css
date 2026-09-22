@@ -1854,6 +1854,51 @@
     @apply gap-2;
   }
 
+  /* MARK: Title Bar */
+  .cn-title-bar {
+    @apply border-b bg-background/80 backdrop-blur-md supports-backdrop-filter:bg-background/65;
+  }
+
+  .cn-title-bar-row {
+    @apply h-11 gap-2 px-2;
+  }
+
+  .cn-title-bar-leading {
+    @apply gap-1;
+  }
+
+  .cn-title-bar-trailing {
+    @apply gap-1;
+  }
+
+  .cn-title-bar-title {
+    @apply inset-x-16 truncate px-1 text-[17px] font-semibold;
+  }
+
+  .cn-title-bar-large-title {
+    @apply px-4 pt-1 pb-2 text-[34px] leading-tight font-bold tracking-tight;
+  }
+
+  .cn-title-bar-button-variant-text {
+    @apply h-8 gap-0.5 rounded-md px-1 text-[17px] font-normal text-primary focus-visible:ring-3 focus-visible:ring-ring/30;
+  }
+
+  .cn-title-bar-button-variant-icon {
+    @apply size-8 rounded-full text-primary focus-visible:ring-3 focus-visible:ring-ring/30 [&_svg]:size-5;
+  }
+
+  .cn-title-bar-back-button {
+    @apply pl-0;
+  }
+
+  .cn-title-bar-search-field {
+    @apply h-9 rounded-full border-none bg-muted;
+  }
+
+  .cn-title-bar-search-input {
+    @apply text-[15px];
+  }
+
   /* MARK: React Aria */
   .cn-alert-dialog-overlay-aria {
     @apply data-entering:animate-in data-exiting:animate-out data-exiting:fade-out-0 data-entering:fade-in-0 bg-black/30 duration-100 supports-backdrop-filter:backdrop-blur-sm;

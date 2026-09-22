@@ -54,6 +54,7 @@ import SwitchExample from "./demos/switch-example";
 import TableExample from "./demos/table-example";
 import TabsExample from "./demos/tabs-example";
 import TextareaExample from "./demos/textarea-example";
+import TitleBarExample from "./demos/title-bar-example";
 import ToastExample from "./demos/toast-example";
 import ToggleExample from "./demos/toggle-example";
 import ToggleGroupExample from "./demos/toggle-group-example";
@@ -116,6 +117,7 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   "table": TableExample,
   "tabs": TabsExample,
   "textarea": TextareaExample,
+  "title-bar": TitleBarExample,
   "toast": ToastExample,
   "toggle": ToggleExample,
   "toggle-group": ToggleGroupExample,
