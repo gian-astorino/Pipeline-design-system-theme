@@ -174,35 +174,35 @@
   }
 
   .cn-button-size-xs {
-    @apply h-6 px-2.5 text-xs has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [--button-gap:--spacing(1)] [&_svg:not([class*='size-'])]:size-3;
+    @apply h-6 px-2.5 text-xs has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [--btn-h:--spacing(6)] [--button-gap:--spacing(1)] [&_svg:not([class*='size-'])]:size-3;
   }
 
   .cn-button-size-sm {
-    @apply h-8 px-3 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [--button-gap:--spacing(1)];
+    @apply h-8 px-3 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [--btn-h:--spacing(8)] [--button-gap:--spacing(1)];
   }
 
   .cn-button-size-default {
-    @apply h-9 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 [--button-gap:--spacing(1.5)];
+    @apply h-9 px-3 has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 [--btn-h:--spacing(9)] [--button-gap:--spacing(1.5)];
   }
 
   .cn-button-size-lg {
-    @apply h-10 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 [--button-gap:--spacing(1.5)];
+    @apply h-10 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 [--btn-h:--spacing(10)] [--button-gap:--spacing(1.5)];
   }
 
   .cn-button-size-icon-xs {
-    @apply size-6 [&_svg:not([class*='size-'])]:size-3;
+    @apply size-6 [--btn-h:--spacing(6)] [&_svg:not([class*='size-'])]:size-3;
   }
 
   .cn-button-size-icon-sm {
-    @apply size-8;
+    @apply size-8 [--btn-h:--spacing(8)];
   }
 
   .cn-button-size-icon {
-    @apply size-9;
+    @apply size-9 [--btn-h:--spacing(9)];
   }
 
   .cn-button-size-icon-lg {
-    @apply size-10;
+    @apply size-10 [--btn-h:--spacing(10)];
   }
 
   /* MARK: Button Group */
@@ -210,12 +210,25 @@
     @apply gap-0.5 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-4xl has-[>[data-variant=outline]]:[&>input]:border-border has-[>[data-variant=outline]]:[&>input:focus-visible]:border-ring has-[>[data-variant=outline]]:*:data-[slot=input-group]:border-border has-[>[data-variant=outline]]:[&>[data-slot=input-group]:has(:focus-visible)]:border-ring has-[>[data-variant=outline]]:*:data-[slot=select-trigger]:border-border has-[>[data-variant=outline]]:[&>[data-slot=select-trigger]:focus-visible]:border-ring;
   }
 
+  /* The outer end of a grouped button keeps a "full pill" look via a
+   * half-own-height radius (--btn-h, set per size on Button/Input/
+   * Select/InputGroup) rather than a flat rounded-4xl. Using a nominal
+   * value far bigger than needed (like rounded-4xl's 36px on a 32px-tall
+   * button) makes the CSS border-radius overlap-correction algorithm
+   * kick in on that corner's own edge — and since that correction scales
+   * EVERY corner on the box by one shared factor, it also drags the
+   * small 4px corner facing the next button down with it (to ~1.8px on
+   * a 32px button), not just the oversized one. A radius equal to
+   * exactly half the element's own height never overlaps itself, so the
+   * shared factor stays 1 and the 4px inner corner renders at its real
+   * value. Falls back to 2.25rem/2 for any child that doesn't set
+   * --btn-h, matching the old flat default. */
   .cn-button-group-orientation-horizontal {
-    @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-4xl!;
+    @apply [&>[data-slot]:first-child]:rounded-l-[calc(var(--btn-h,2.25rem)/2)]! [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-[calc(var(--btn-h,2.25rem)/2)]!;
   }
 
   .cn-button-group-orientation-vertical {
-    @apply [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-4xl!;
+    @apply [&>[data-slot]:first-child]:rounded-t-[calc(var(--btn-h,2.25rem)/2)]! [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-[calc(var(--btn-h,2.25rem)/2)]!;
   }
 
   .cn-button-group-text {
@@ -228,7 +241,7 @@
 
   /* MARK: Input */
   .cn-input {
-    @apply bg-input/50 border-transparent focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-9 rounded-3xl border px-3 py-1 text-base transition-[color,box-shadow,background-color] file:h-7 file:text-sm file:font-medium focus-visible:ring-3 aria-invalid:ring-3 md:text-sm;
+    @apply bg-input/50 border-transparent focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-9 [--btn-h:--spacing(9)] rounded-3xl border px-3 py-1 text-base transition-[color,box-shadow,background-color] file:h-7 file:text-sm file:font-medium focus-visible:ring-3 aria-invalid:ring-3 md:text-sm;
   }
 
   /* MARK: Textarea */
@@ -238,7 +251,7 @@
 
   /* MARK: Select */
   .cn-select-trigger {
-    @apply bg-input/50 border-transparent data-placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 gap-1.5 rounded-3xl border py-2 px-3 text-sm transition-[color,box-shadow,background-color] focus-visible:ring-3 aria-invalid:ring-3 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:flex *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*='size-'])]:size-4;
+    @apply bg-input/50 border-transparent data-placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 gap-1.5 rounded-3xl border py-2 px-3 text-sm transition-[color,box-shadow,background-color] focus-visible:ring-3 aria-invalid:ring-3 data-[size=default]:h-9 data-[size=default]:[--btn-h:--spacing(9)] data-[size=sm]:h-8 data-[size=sm]:[--btn-h:--spacing(8)] *:data-[slot=select-value]:flex *:data-[slot=select-value]:gap-1.5 [&_svg:not([class*='size-'])]:size-4;
   }
 
   .cn-select-value {
@@ -373,7 +386,7 @@
 
   /* MARK: Input Group */
   .cn-input-group {
-    @apply bg-input/50 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-ring/30 has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[[data-slot][aria-invalid=true]]:border-destructive dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40 h-9 rounded-4xl border transition-[color,box-shadow,background-color] in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-data-[align=block-end]:rounded-3xl has-data-[align=block-start]:rounded-3xl has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-3 has-[textarea]:rounded-2xl has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-1.5 has-[>[data-align=inline-start]]:[&>input]:pl-1.5;
+    @apply bg-input/50 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-ring/30 has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[[data-slot][aria-invalid=true]]:border-destructive dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40 h-9 [--btn-h:--spacing(9)] rounded-4xl border transition-[color,box-shadow,background-color] in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-data-[align=block-end]:rounded-3xl has-data-[align=block-start]:rounded-3xl has-[[data-slot=input-group-control]:focus-visible]:ring-3 has-[[data-slot][aria-invalid=true]]:ring-3 has-[textarea]:rounded-2xl has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pr-1.5 has-[>[data-align=inline-start]]:[&>input]:pl-1.5;
   }
 
   .cn-input-group-addon {
