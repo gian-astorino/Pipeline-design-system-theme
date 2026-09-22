@@ -4,6 +4,7 @@ import { Example, ExampleWrapper } from "@/components/catalog/example"
 import { Button } from "@/components/ui/button"
 import {
   ButtonGroup,
+  ButtonGroupSeparator,
   ButtonGroupText,
 } from "@/components/ui/button-group"
 import {
@@ -46,6 +47,7 @@ export default function ButtonGroupExample() {
       <ButtonGroupWithDropdown />
       <ButtonGroupWithSelect />
       <ButtonGroupWithIcons />
+      <ButtonGroupWithSeparator />
       <ButtonGroupWithInputGroup />
       <ButtonGroupWithFields />
       <ButtonGroupWithLike />
@@ -233,6 +235,30 @@ function ButtonGroupWithIcons() {
           </Button>
           <Button variant="secondary">
             <ArrowClockwise />
+          </Button>
+        </ButtonGroup>
+      </div>
+    </Example>
+  )
+}
+
+function ButtonGroupWithSeparator() {
+  return (
+    <Example title="With Separator">
+      <div className="flex flex-col gap-4">
+        <ButtonGroup>
+          <Button variant="secondary" size="icon">
+            <MagnifyingGlass />
+          </Button>
+          <Button variant="secondary" size="icon">
+            <Copy />
+          </Button>
+          <ButtonGroupSeparator />
+          <Button variant="secondary" size="icon">
+            <Share />
+          </Button>
+          <Button variant="secondary" size="icon">
+            <Trash />
           </Button>
         </ButtonGroup>
       </div>
