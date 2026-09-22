@@ -1,7 +1,7 @@
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
 
+import { Button } from "@/components/ui/button"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
 import { CaretLeft, MagnifyingGlass } from "@phosphor-icons/react"
 
@@ -68,46 +68,21 @@ function TitleBarLargeTitle({ className, ...props }: React.ComponentProps<"div">
   )
 }
 
-const titleBarButtonVariants = cva(
-  "cn-title-bar-button inline-flex shrink-0 items-center justify-center outline-none active:opacity-50 disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none",
-  {
-    variants: {
-      variant: {
-        text: "cn-title-bar-button-variant-text",
-        icon: "cn-title-bar-button-variant-icon",
-      },
-    },
-    defaultVariants: {
-      variant: "text",
-    },
-  }
-)
-
-function TitleBarButton({
-  className,
-  variant = "text",
-  ...props
-}: React.ComponentProps<"button"> & VariantProps<typeof titleBarButtonVariants>) {
-  return (
-    <button
-      type="button"
-      data-slot="title-bar-button"
-      className={cn(titleBarButtonVariants({ variant }), className)}
-      {...props}
-    />
-  )
-}
-
 function TitleBarBackButton({
   className,
   children = "Back",
   ...props
-}: React.ComponentProps<"button">) {
+}: React.ComponentProps<typeof Button>) {
   return (
-    <TitleBarButton className={cn("cn-title-bar-back-button", className)} {...props}>
-      <CaretLeft weight="bold" />
+    <Button
+      variant="link"
+      data-slot="title-bar-back-button"
+      className={cn("cn-title-bar-back-button", className)}
+      {...props}
+    >
+      <CaretLeft weight="bold" data-icon="inline-start" />
       {children}
-    </TitleBarButton>
+    </Button>
   )
 }
 
@@ -124,7 +99,7 @@ function TitleBarSearchField({
       <InputGroupInput
         data-slot="title-bar-search-input"
         placeholder={placeholder}
-        className={cn("cn-title-bar-search-input", className)}
+        className={className}
         {...props}
       />
     </InputGroup>
@@ -138,8 +113,6 @@ export {
   TitleBarTrailing,
   TitleBarTitle,
   TitleBarLargeTitle,
-  TitleBarButton,
   TitleBarBackButton,
   TitleBarSearchField,
-  titleBarButtonVariants,
 }

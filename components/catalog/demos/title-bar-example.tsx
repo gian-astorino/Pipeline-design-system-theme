@@ -1,8 +1,8 @@
 import { Example, ExampleWrapper } from "@/components/catalog/example"
+import { Button } from "@/components/ui/button"
 import {
   TitleBar,
   TitleBarBackButton,
-  TitleBarButton,
   TitleBarLargeTitle,
   TitleBarLeading,
   TitleBarRow,
@@ -61,9 +61,9 @@ function TitleBarWithBackButton() {
             </TitleBarLeading>
             <TitleBarTitle>Details</TitleBarTitle>
             <TitleBarTrailing>
-              <TitleBarButton variant="icon" aria-label="Share">
+              <Button variant="ghost" size="icon-sm" aria-label="Share">
                 <Share />
-              </TitleBarButton>
+              </Button>
             </TitleBarTrailing>
           </TitleBarRow>
         </TitleBar>
@@ -79,11 +79,13 @@ function TitleBarModal() {
         <TitleBar>
           <TitleBarRow>
             <TitleBarLeading>
-              <TitleBarButton>Cancel</TitleBarButton>
+              <Button variant="link">Cancel</Button>
             </TitleBarLeading>
             <TitleBarTitle>New Event</TitleBarTitle>
             <TitleBarTrailing>
-              <TitleBarButton className="font-semibold">Add</TitleBarButton>
+              <Button variant="link" className="font-semibold">
+                Add
+              </Button>
             </TitleBarTrailing>
           </TitleBarRow>
         </TitleBar>
@@ -99,15 +101,15 @@ function TitleBarLargeTitleExample() {
         <TitleBar>
           <TitleBarRow>
             <TitleBarLeading>
-              <TitleBarButton variant="icon" aria-label="Notifications">
+              <Button variant="ghost" size="icon-sm" aria-label="Notifications">
                 <Bell />
-              </TitleBarButton>
+              </Button>
             </TitleBarLeading>
             <TitleBarTitle />
             <TitleBarTrailing>
-              <TitleBarButton variant="icon" aria-label="Settings">
+              <Button variant="ghost" size="icon-sm" aria-label="Settings">
                 <GearSix />
-              </TitleBarButton>
+              </Button>
             </TitleBarTrailing>
           </TitleBarRow>
           <TitleBarLargeTitle>Messages</TitleBarLargeTitle>
@@ -126,9 +128,9 @@ function TitleBarLargeTitleWithSearch() {
             <TitleBarLeading />
             <TitleBarTitle />
             <TitleBarTrailing>
-              <TitleBarButton variant="icon" aria-label="Settings">
+              <Button variant="ghost" size="icon-sm" aria-label="Settings">
                 <GearSix />
-              </TitleBarButton>
+              </Button>
             </TitleBarTrailing>
           </TitleBarRow>
           <TitleBarLargeTitle>Library</TitleBarLargeTitle>
@@ -146,9 +148,11 @@ function TitleBarSearchActive() {
     <Example title="Search (Active, with Cancel)">
       <Frame>
         <TitleBar>
-          <TitleBarRow className="gap-2 px-3">
+          <TitleBarRow className="px-3">
             <TitleBarSearchField />
-            <TitleBarButton className="shrink-0">Cancel</TitleBarButton>
+            <Button variant="link" className="shrink-0">
+              Cancel
+            </Button>
           </TitleBarRow>
         </TitleBar>
       </Frame>
