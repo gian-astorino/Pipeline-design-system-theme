@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { WarningCircle } from "@phosphor-icons/react"
+import { WarningCircle } from "@/components/icons"
 
 export default function AlertExample() {
   return (

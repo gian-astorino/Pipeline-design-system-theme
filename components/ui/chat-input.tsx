@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ArrowUp } from "@phosphor-icons/react"
+import { ArrowUp } from "@/components/icons"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"

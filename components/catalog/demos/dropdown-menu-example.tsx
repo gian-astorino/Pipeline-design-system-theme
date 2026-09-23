@@ -34,7 +34,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Archive, ArrowDown, ArrowRight, ArrowUp, Bank, Bell, CaretUpDown, ChatCircle, CheckCircle, Clipboard, Copy, CreditCard, Envelope, Gear, Layout, Pencil, PlusCircle, Pulse, Question, Scissors, Share, Sidebar, SignOut, Trash, User, Users, Wallet } from "@phosphor-icons/react"
+import { Archive, ArrowDown, ArrowRight, ArrowUp, Bank, Bell, CaretUpDown, ChatCircle, CheckCircle, Clipboard, Copy, CreditCard, Envelope, Gear, Layout, Pencil, PlusCircle, Pulse, Question, Scissors, Share, Sidebar, SignOut, Trash, User, Users, Wallet } from "@/components/icons"
 
 export default function DropdownMenuExample() {
   return (

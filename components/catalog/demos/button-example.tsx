@@ -2,7 +2,7 @@
 
 import { Example, ExampleWrapper } from "@/components/catalog/example"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { ArrowCircleLeft, ArrowRight } from "@phosphor-icons/react"
+import { ArrowCircleLeft, ArrowRight } from "@/components/icons"
 
 export default function ButtonExample() {
   return (

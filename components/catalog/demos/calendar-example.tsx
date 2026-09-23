@@ -20,7 +20,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { CalendarBlank, CaretDown, Clock } from "@phosphor-icons/react"
+import { CalendarBlank, CaretDown, Clock } from "@/components/icons"
 
 export default function CalendarExample() {
   return (

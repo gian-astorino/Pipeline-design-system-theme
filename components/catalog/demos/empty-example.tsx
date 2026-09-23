@@ -14,7 +14,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group"
 import { Kbd } from "@/components/ui/kbd"
-import { ArrowUpRight, CircleDashed, Folder, Plus } from "@phosphor-icons/react"
+import { ArrowUpRight, CircleDashed, Folder, Plus } from "@/components/icons"
 
 export default function EmptyExample() {
   return (

@@ -21,7 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Bluetooth, Trash } from "@phosphor-icons/react"
+import { Bluetooth, Trash } from "@/components/icons"
 
 export default function AlertDialogExample() {
   return (

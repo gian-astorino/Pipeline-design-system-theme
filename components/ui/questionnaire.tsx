@@ -5,7 +5,7 @@ import { Questionnaire as QuestionnairePrimitive } from "@shadcn/react/questionn
 import { cn } from "cn"
 
 import { buttonVariants, type Button } from "@/components/ui/button"
-import { Check } from "@phosphor-icons/react"
+import { Check } from "@/components/icons"
 
 function Questionnaire({
   className,

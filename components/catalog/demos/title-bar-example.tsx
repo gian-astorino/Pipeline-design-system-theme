@@ -10,7 +10,7 @@ import {
   TitleBarTitle,
   TitleBarTrailing,
 } from "@/components/ui/title-bar"
-import { Bell, GearSix, Share } from "@phosphor-icons/react"
+import { Bell, GearSix, Share } from "@/components/icons"
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (

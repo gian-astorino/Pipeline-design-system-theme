@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { ArrowUpRight } from "@phosphor-icons/react"
+import { ArrowUpRight } from "@/components/icons"
 
 export default function AccordionExample() {
   return (

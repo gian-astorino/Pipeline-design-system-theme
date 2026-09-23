@@ -1,7 +1,7 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 import { cn } from "cn"
 
-import { CaretDown, CaretUp } from "@phosphor-icons/react"
+import { CaretDown, CaretUp } from "@/components/icons"
 
 function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (

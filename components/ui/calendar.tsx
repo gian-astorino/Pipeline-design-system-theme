@@ -10,7 +10,7 @@ import {
 } from "react-day-picker"
 
 import { Button, buttonVariants } from "@/components/ui/button"
-import { CaretDown, CaretLeft, CaretRight } from "@phosphor-icons/react"
+import { CaretDown, CaretLeft, CaretRight } from "@/components/icons"
 
 function Calendar({
   className,

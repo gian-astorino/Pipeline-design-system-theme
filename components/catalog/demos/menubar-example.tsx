@@ -29,7 +29,7 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar"
-import { Check, CircleDashed, Clipboard, Copy, File, FloppyDisk, Folder, Gear, Image, Link, MagnifyingGlass, Scissors, SignOut, Table, TextB, TextItalic, TextUnderline, Trash, User } from "@phosphor-icons/react"
+import { Check, CircleDashed, Clipboard, Copy, File, FloppyDisk, Folder, Gear, Image, Link, MagnifyingGlass, Scissors, SignOut, Table, TextB, TextItalic, TextUnderline, Trash, User } from "@/components/icons"
 
 export default function MenubarExample() {
   return (

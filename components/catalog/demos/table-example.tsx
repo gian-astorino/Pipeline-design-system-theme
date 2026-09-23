@@ -28,7 +28,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { DotsThreeOutline } from "@phosphor-icons/react"
+import { DotsThreeOutline } from "@/components/icons"
 
 const invoices = [
   {

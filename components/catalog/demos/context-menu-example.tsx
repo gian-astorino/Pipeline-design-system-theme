@@ -28,7 +28,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Archive, Clipboard, Copy, Pencil, Scissors, Share, Trash } from "@phosphor-icons/react"
+import { Archive, Clipboard, Copy, Pencil, Scissors, Share, Trash } from "@/components/icons"
 
 export default function ContextMenuExample() {
   return (

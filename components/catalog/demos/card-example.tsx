@@ -26,7 +26,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
-import { Plus, TextT } from "@phosphor-icons/react"
+import { Plus, TextT } from "@/components/icons"
 
 const spacingOptions = [
   {

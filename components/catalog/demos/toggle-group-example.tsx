@@ -21,7 +21,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
-import { ArrowDown, ArrowUp, Bookmark, Heart, Star, TextB, TextItalic, TextUnderline, TrendUp } from "@phosphor-icons/react"
+import { ArrowDown, ArrowUp, Bookmark, Heart, Star, TextB, TextItalic, TextUnderline, TrendUp } from "@/components/icons"
 
 export default function ToggleGroupExample() {
   return (

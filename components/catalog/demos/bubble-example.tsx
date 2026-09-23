@@ -16,7 +16,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { Marker, MarkerContent } from "@/components/ui/marker"
-import { CaretDown, ThumbsDown, ThumbsUp } from "@phosphor-icons/react"
+import { CaretDown, ThumbsDown, ThumbsUp } from "@/components/icons"
 
 export default function BubbleExample() {
   return (

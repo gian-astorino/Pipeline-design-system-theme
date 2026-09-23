@@ -32,7 +32,7 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { CaretUpDown, Check, MagnifyingGlass } from "@phosphor-icons/react"
+import { CaretUpDown, Check, MagnifyingGlass } from "@/components/icons"
 
 export default function SidebarExample() {
   const data = {

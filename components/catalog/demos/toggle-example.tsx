@@ -1,7 +1,7 @@
 import { Example, ExampleWrapper } from "@/components/catalog/example"
 import { Button } from "@/components/ui/button"
 import { Toggle } from "@/components/ui/toggle"
-import { Bookmark, TextB, TextItalic, TextUnderline } from "@phosphor-icons/react"
+import { Bookmark, TextB, TextItalic, TextUnderline } from "@/components/icons"
 
 export default function ToggleExample() {
   return (

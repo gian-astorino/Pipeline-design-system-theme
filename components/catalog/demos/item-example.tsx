@@ -16,7 +16,7 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item"
-import { Archive } from "@phosphor-icons/react"
+import { Archive } from "@/components/icons"
 
 export default function ItemExample() {
   return (

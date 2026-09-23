@@ -14,7 +14,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { AppWindow, Code, DotsThreeOutline, Gear, House, MagnifyingGlass } from "@phosphor-icons/react"
+import { AppWindow, Code, DotsThreeOutline, Gear, House, MagnifyingGlass } from "@/components/icons"
 
 export default function TabsExample() {
   return (

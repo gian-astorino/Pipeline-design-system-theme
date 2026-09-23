@@ -16,7 +16,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group"
 import { Spinner } from "@/components/ui/spinner"
-import { ArrowRight } from "@phosphor-icons/react"
+import { ArrowRight } from "@/components/icons"
 
 export default function SpinnerExample() {
   return (

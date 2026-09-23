@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
 
-import { CheckCircle, Info, Spinner, Warning, XCircle } from "@phosphor-icons/react"
+import { CheckCircle, Info, Spinner, Warning, XCircle } from "@/components/icons"
 
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()

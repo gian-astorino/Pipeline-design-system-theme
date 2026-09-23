@@ -40,7 +40,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart"
-import { TrendDown, TrendUp } from "@phosphor-icons/react"
+import { TrendDown, TrendUp } from "@/components/icons"
 
 const areaChartData = [
   { month: "January", desktop: 186 },

@@ -59,7 +59,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Info } from "@phosphor-icons/react"
+import { Info } from "@/components/icons"
 
 export default function DialogExample() {
   return (

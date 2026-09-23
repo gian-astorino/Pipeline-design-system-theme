@@ -36,7 +36,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ArrowClockwise, ArrowLeft, ArrowRight, ArrowsHorizontal, ArrowsVertical, CaretDown, Check, Copy, Heart, MagnifyingGlass, Microphone, Minus, Plus, Share, SpeakerSlash, Trash, UserMinus, Warning } from "@phosphor-icons/react"
+import { ArrowClockwise, ArrowLeft, ArrowRight, ArrowsHorizontal, ArrowsVertical, CaretDown, Check, Copy, Heart, MagnifyingGlass, Microphone, Minus, Plus, Share, SpeakerSlash, Trash, UserMinus, Warning } from "@/components/icons"
 
 export default function ButtonGroupExample() {
   return (

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Microphone, Plus } from "@phosphor-icons/react"
+import { Microphone, Plus } from "@/components/icons"
 
 import { Example, ExampleWrapper } from "@/components/catalog/example"
 import { Bubble, BubbleGroup } from "@/components/ui/bubble"

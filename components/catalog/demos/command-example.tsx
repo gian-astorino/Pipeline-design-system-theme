@@ -16,7 +16,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command"
-import { Bell, Calculator, CalendarBlank, Clipboard, Code, Copy, CreditCard, FileText, Folder, FolderPlus, Gear, GridFour, House, Image, List, MagnifyingGlassMinus, MagnifyingGlassPlus, Plus, Question, Scissors, Smiley, Trash, Tray, User } from "@phosphor-icons/react"
+import { Bell, Calculator, CalendarBlank, Clipboard, Code, Copy, CreditCard, FileText, Folder, FolderPlus, Gear, GridFour, House, Image, List, MagnifyingGlassMinus, MagnifyingGlassPlus, Plus, Question, Scissors, Smiley, Trash, Tray, User } from "@/components/icons"
 
 export default function CommandExample() {
   return (

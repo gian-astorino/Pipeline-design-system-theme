@@ -4,7 +4,7 @@ import * as React from "react"
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu"
 import { cn } from "cn"
 
-import { CaretRight, Check } from "@phosphor-icons/react"
+import { CaretRight, Check } from "@/components/icons"
 
 import { MenuHighlight } from "@/components/ui/menu-highlight"
 

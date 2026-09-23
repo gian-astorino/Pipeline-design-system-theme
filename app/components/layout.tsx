@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft } from "@phosphor-icons/react/ssr";
+import { ArrowLeft } from "@/components/icons";
 
 import { CatalogNav } from "@/components/catalog/catalog-nav";
 import { Button } from "@/components/ui/button";

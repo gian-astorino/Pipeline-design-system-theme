@@ -24,7 +24,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Spinner } from "@/components/ui/spinner"
-import { ArrowClockwise, Check, Clock, Copy, Download, FileCode, FileMagnifyingGlass, FileText, FileX, FileZip, Presentation, Table, X } from "@phosphor-icons/react"
+import { ArrowClockwise, Check, Clock, Copy, Download, FileCode, FileMagnifyingGlass, FileText, FileX, FileZip, Presentation, Table, X } from "@/components/icons"
 
 export default function AttachmentExample() {
   return (

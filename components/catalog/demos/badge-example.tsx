@@ -1,7 +1,7 @@
 import { Example, ExampleWrapper } from "@/components/catalog/example"
 import { Badge } from "@/components/ui/badge"
 import { Spinner } from "@/components/ui/spinner"
-import { ArrowRight, ArrowUpRight, CheckCircle } from "@phosphor-icons/react"
+import { ArrowRight, ArrowUpRight, CheckCircle } from "@/components/icons"
 
 export default function BadgeExample() {
   return (

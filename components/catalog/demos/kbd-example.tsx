@@ -11,7 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ArrowLeft, ArrowRight, CircleDashed, FloppyDisk } from "@phosphor-icons/react"
+import { ArrowLeft, ArrowRight, CircleDashed, FloppyDisk } from "@/components/icons"
 
 export default function KbdExample() {
   return (

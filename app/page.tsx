@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight } from "@phosphor-icons/react/ssr"
+import { ArrowRight } from "@/components/icons"
 
 import {
   Card,

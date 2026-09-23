@@ -37,7 +37,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { ChartBar, ChartLine, ChartPie } from "@phosphor-icons/react"
+import { ChartBar, ChartLine, ChartPie } from "@/components/icons"
 
 export default function SelectExample() {
   return (

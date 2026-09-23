@@ -4,7 +4,7 @@ import * as React from "react"
 import { Select as SelectPrimitive } from "@base-ui/react/select"
 import { cn } from "cn"
 
-import { CaretDown, CaretUp, Check } from "@phosphor-icons/react"
+import { CaretDown, CaretUp, Check } from "@/components/icons"
 
 import { MenuHighlight } from "@/components/ui/menu-highlight"
 

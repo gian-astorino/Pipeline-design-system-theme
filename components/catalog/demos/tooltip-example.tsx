@@ -8,7 +8,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { FloppyDisk, Info } from "@phosphor-icons/react"
+import { FloppyDisk, Info } from "@/components/icons"
 
 export default function TooltipExample() {
   return (

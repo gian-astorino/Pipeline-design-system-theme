@@ -19,7 +19,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CaretRight, File, Folder, Minus, Plus } from "@phosphor-icons/react"
+import { CaretRight, File, Folder, Minus, Plus } from "@/components/icons"
 
 export default function CollapsibleExample() {
   return (

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft } from "@phosphor-icons/react/ssr";
+import { ArrowLeft } from "@/components/icons";
 
 import {
   semanticGroups,

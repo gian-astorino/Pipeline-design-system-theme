@@ -25,7 +25,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { ArrowClockwise } from "@phosphor-icons/react"
+import { ArrowClockwise } from "@/components/icons"
 
 export default function InputOTPExample() {
   return (

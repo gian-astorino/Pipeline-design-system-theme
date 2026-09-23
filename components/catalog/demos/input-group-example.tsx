@@ -54,7 +54,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ArrowClockwise, ArrowSquareOut, ArrowUp, CaretDown, Check, Code, Copy, Envelope, EyeSlash, Info, MagnifyingGlass, Microphone, Record, Sparkle, Star, Trash } from "@phosphor-icons/react"
+import { ArrowClockwise, ArrowSquareOut, ArrowUp, CaretDown, Check, Code, Copy, Envelope, EyeSlash, Info, MagnifyingGlass, Microphone, Record, Sparkle, Star, Trash } from "@/components/icons"
 
 export default function InputGroupExample() {
   const [country, setCountry] = useState("+1")

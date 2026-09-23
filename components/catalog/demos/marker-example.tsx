@@ -26,7 +26,7 @@ import {
   MarkerIcon,
 } from "@/components/ui/marker"
 import { Spinner } from "@/components/ui/spinner"
-import { CaretRight, Check, Clock, FileText, GitBranch, MagnifyingGlass, UserCircle } from "@phosphor-icons/react"
+import { CaretRight, Check, Clock, FileText, GitBranch, MagnifyingGlass, UserCircle } from "@/components/icons"
 
 export default function MarkerExamples() {
   return (

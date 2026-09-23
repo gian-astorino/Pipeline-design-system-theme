@@ -16,7 +16,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
-import { Check, Plus } from "@phosphor-icons/react"
+import { Check, Plus } from "@/components/icons"
 
 export default function AvatarExample() {
   return (

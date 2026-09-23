@@ -3,7 +3,7 @@ import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
-import { CaretLeft, MagnifyingGlass } from "@phosphor-icons/react"
+import { CaretLeft, MagnifyingGlass } from "@/components/icons"
 
 function TitleBar({ className, ...props }: React.ComponentProps<"header">) {
   return (

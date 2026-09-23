@@ -17,7 +17,7 @@ import {
   ProgressValue,
 } from "@/components/ui/progress"
 import { Slider } from "@/components/ui/slider"
-import { File } from "@phosphor-icons/react"
+import { File } from "@/components/icons"
 
 export default function ProgressExample() {
   return (

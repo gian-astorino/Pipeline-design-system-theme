@@ -60,7 +60,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { CaretDown, Globe } from "@phosphor-icons/react"
+import { CaretDown, Globe } from "@/components/icons"
 
 export default function ComboboxExample() {
   return (

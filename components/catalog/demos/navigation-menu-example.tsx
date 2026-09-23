@@ -13,7 +13,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { WarningCircle } from "@phosphor-icons/react"
+import { WarningCircle } from "@/components/icons"
 
 const components: { title: string; href: string; description: string }[] = [
   {
