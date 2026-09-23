@@ -70,15 +70,18 @@
   }
 
   .cn-radio-group-item {
-    @apply bg-input/90 data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary border-transparent aria-invalid:border-destructive focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 dark:aria-invalid:border-destructive/50 flex size-4 rounded-full border focus-visible:ring-3 aria-invalid:ring-3 group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:border-transparent;
+    @apply bg-input/90 data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary border-transparent aria-invalid:border-destructive focus-visible:border-ring focus-visible:ring-ring/30 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 dark:aria-invalid:border-destructive/50 flex size-4 rounded-full border transition-[color,box-shadow,background-color] focus-visible:ring-3 aria-invalid:ring-3 group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:border-transparent;
   }
 
   .cn-radio-group-item-aria {
     @apply data-selected:bg-primary data-selected:text-primary-foreground dark:data-selected:bg-primary data-focus-visible:border-ring data-focus-visible:ring-ring/30 data-focus-visible:ring-3 data-invalid:border-destructive data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40 dark:data-invalid:border-destructive/50 data-invalid:ring-3;
   }
 
+  /* keepMounted isn't needed - Base UI keeps the indicator mounted through
+   * its own exit transition regardless, only removing it once the
+   * scale/opacity transition below actually finishes. */
   .cn-radio-group-indicator {
-    @apply flex size-4 items-center justify-center;
+    @apply flex size-4 scale-100 items-center justify-center opacity-100 transition-[scale,opacity] duration-150 ease-out data-ending-style:scale-50 data-ending-style:opacity-0 data-starting-style:scale-50 data-starting-style:opacity-0;
   }
 
   .cn-radio-group-indicator-icon {
