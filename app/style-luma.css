@@ -1,3 +1,14 @@
+/* corner-shape doesn't inherit, so it has to be set on every element
+ * that might carry a border-radius rather than once on .style-luma
+ * itself - harmless on elements with no radius, since the shape only
+ * matters where there's a corner to round. */
+.style-luma,
+.style-luma *,
+.style-luma *::before,
+.style-luma *::after {
+  corner-shape: superellipse(1.05);
+}
+
 .style-luma {
   /* MARK: Menu Highlight */
   /* Shared sliding hover box for DropdownMenu/ContextMenu/Menubar/Select
