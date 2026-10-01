@@ -6,7 +6,7 @@
 .style-luma *,
 .style-luma *::before,
 .style-luma *::after {
-  corner-shape: superellipse(1.05);
+  corner-shape: superellipse(1.1);
 }
 
 .style-luma {
